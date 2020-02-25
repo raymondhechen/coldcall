@@ -1,0 +1,6 @@
+--Finds mutual availabilities between two users
+SELECT a1.uid, a1.start_time, a1.end_time, a2.uid, a2.start_time, a2.end_time
+FROM Availabilities a1, Availabilities a2 WHERE
+DATEPART(hour, a1.end_time) > DATEPART(hour, a2.start_time) AND DATEDIFF(HOUR, a1.end_time, a2.start_time) >= 0.5
+OR DATEPART(hour, a2.end_time) > DATEPART(hour, a1.start_time) AND DATEDIFF(hour, a2.end_time, a2.start_time) >= 0.5
+AND a1.uid <> a2.uid;

@@ -1,0 +1,3 @@
+--Finds the number of lessons each teacher is giving
+SELECT R.teacher_uid, COUNT(*) FROM Reservations R
+GROUP BY(R.teacher_uid);

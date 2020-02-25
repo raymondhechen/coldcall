@@ -1,0 +1,5 @@
+--Pairs users who want to learn a particular skill and people who teach them
+SELECT learn.uid, skills.uid, skills.skill_name 
+FROM Skills skills, WantsToLearn learn
+WHERE skills.skill_name = learn.desired_skill
+AND learn.uid <> skills.uid;

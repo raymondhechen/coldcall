@@ -1,5 +1,5 @@
 Raymond Chen - Project manager. Building the application frontend using ReactJS
-Sachin Jaishankar - Project feature ideation, LinkedIn Python web scraper
+Sachin Jaishankar - Project feature ideation, Worked on ER Diagram, LinkedIn Python web scraper
 Luke Qin - Worked on SQL statements and implementation, wrote up project writeup
-Jeffrey Luo - Worked on ER diagram. Created the tables and loaded sample data
+Jeffrey Luo - Worked on ER diagram. Created the tables and loaded sample data, made testable PostgreSQL database
 Shrey Gupta - Worked on Project feature Ideation and project writeup

@@ -1,0 +1,2 @@
+--Projects all the reservations and the parameters they are associated with
+SELECT student_uid, teacher_uid, start_time, end_time FROM Reservations;
