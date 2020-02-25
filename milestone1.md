@@ -2,7 +2,7 @@ Cold Call is a platform to help connect students who want to learn and students 
 
 We're building Cold Call as a web application where students can sign up for by entering their skillsets, knowledge area, academic interetsts, etc. We then helping to connect those who want to learn certain things to those who can teach them. Hopefully, we'll be able to connect students by getting them to meet at a mutual time and area, or even over a meal or coffee. 
 
-As for our current progress in constructing this application, we've outlined our database structure in our ER diagram (/backend/database/ER.pdf) and created our create.sql file too, which contains our database tables, restrictions, and more (/backend/database/create.sql).
+As for our current progress in constructing this application, we've outlined our database structure in our ER diagram (/backend/database/ER.pdf) and created our create.sql file too, which contains our database tables, restrictions, and more (/backend/database/create.sql). For example SQL queries and the following output, please refer to the backend database directory (/backend/database/test-sample.sql, /backend/database/test-sample.out).
 
 First, we'll just some example data as a proof of concept. Then, to populate our database initially for further testing, we'll be scraping data off of LinkedIn as it is likely the most fitful place to find students, their academic interests, career focuses, skills, and more. However, in the future, we'll create a sign up option where users can create their profiles and enter in data themselves.
 
