@@ -1,5 +1,6 @@
 Raymond Chen
 Sachin Jaishankar
 Luke Qin
-Jeffery Luo
+Jeffrey Luo - Worked on creating the ER diagram. Created the tables for the database, as well as implemented 
+loading CSV files as sample data into the database.
 Shrey Gupta
