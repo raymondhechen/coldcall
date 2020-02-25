@@ -1,6 +1,5 @@
-Raymond Chen
-Sachin Jaishankar
-Luke Qin
-Jeffrey Luo - Worked on creating the ER diagram. Created the tables for the database, as well as implemented 
-loading CSV files as sample data into the database.
-Shrey Gupta
+Raymond Chen - Project manager. Building the application frontend using ReactJS
+Sachin Jaishankar - Project feature ideation, LinkedIn Python web scraper
+Luke Qin - Worked on SQL statements and implementation, wrote up project writeup
+Jeffrey Luo - Worked on ER diagram. Created the tables and loaded sample data
+Shrey Gupta - Worked on Project feature Ideation and project writeup
