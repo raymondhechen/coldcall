@@ -1,4 +1,4 @@
-\copy Users(uid, name) FROM '/Users/jeffreyluo/Desktop/School/CS316/coldcall/backend/data/Users.csv' DELIMITER ',' CSV HEADER;
+\copy Users(uid, name) FROM '/Users/jeffreyluo/Desktop/School/CS316/coldcall/backend/data/users.csv' DELIMITER ',' CSV HEADER;
 
 \copy Skills(uid, skill_name) FROM '/Users/jeffreyluo/Desktop/School/CS316/coldcall/backend/data/skills.csv' DELIMITER ',' CSV HEADER;
 
