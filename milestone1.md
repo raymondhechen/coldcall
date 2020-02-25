@@ -6,7 +6,7 @@ As for our current progress in constructing this application, we've outlined our
 
 First, we'll just some example data as a proof of concept. Then, to populate our database initially for further testing, we'll be scraping data off of LinkedIn as it is likely the most fitful place to find students, their academic interests, career focuses, skills, and more. However, in the future, we'll create a sign up option where users can create their profiles and enter in data themselves.
 
-The following schemas describe our database. Please refer to the ER diagram for a more intuitive structure. Please refer to the create.sql file for the exact implementation too.
+The following schemas describe our database. Please refer to the ER diagram for a more intuitive structure. Please refer to the create.sql file for the exact implementation and primary keys.
 
 Availabilities(uid,start_time,end_time)
 Meetingspots(place,location_name)
