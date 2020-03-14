@@ -9,6 +9,12 @@ CREATE TABLE Skills (
     PRIMARY KEY(uid, skill_name)
 );
 
+CREATE TABLE WantsToLearn (
+    uid varchar(256) NOT NULL REFERENCES Users(uid),
+    desired_skill varchar(256),
+    PRIMARY KEY(uid, desired_skill)
+);
+
 CREATE TABLE Timeslots (
     start_time time(0) NOT NULL,
     end_time time(0) NOT NULL CHECK (end_time > start_time),

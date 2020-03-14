@@ -1,0 +1,5 @@
+SELECT u.uid FROM Users u
+EXCEPT(
+SELECT w.uid FROM WantsToLearn w, Skills s WHERE
+w.desired_skill = s.skill_name AND w.uid <> s.uid
+);

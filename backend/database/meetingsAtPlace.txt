@@ -1,0 +1,3 @@
+--Projects all the meetings that are happening at a particular place
+SELECT m.place, r.student_uid, r.teacher_uid, r.start_time, r.end_time
+FROM Meetingspots m, Reservations r WHERE r.location_name = m.location_name;
