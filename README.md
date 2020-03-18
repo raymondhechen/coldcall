@@ -6,7 +6,7 @@ Connecting, Learning, and Empowering
 ReactJS
 
 ## Backend
-Flask, PostgreSQL
+ExpressJS, PostgreSQL
 
 ### SQL Instructions
 Before running the instructions to setup the database, navigate to the load.sql file in the coldcall/backend/database folder. Change the paths of the csv files such that it matches the paths of the csv files on your local machine.
