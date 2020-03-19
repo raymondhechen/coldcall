@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 import styled from 'styled-components';
 
 const EmailTextBox = styled.input`
@@ -54,6 +55,7 @@ class Form extends Component {
             this.setState({
                 valid: true
             });
+            this.props.history.push('/join');
         }
         else {
             this.setState({
@@ -71,7 +73,7 @@ class Form extends Component {
     render() {
         return (
             <div>
-                <EmailTextBox type="text" value={this.state.email} onChange={e => this.handleChange(e)} />
+                <EmailTextBox type="form" value={this.state.email} onChange={e => this.handleChange(e)} onSubmit={e => this.joinClick(e)}/>
                 <EmailButton type="button" value="JOIN" onClick={e => this.joinClick(e)}/>
                 {!this.state.valid ? 
                     <ErrorMsg>Invalid Email Address</ErrorMsg> : 
@@ -82,4 +84,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default withRouter(Form);

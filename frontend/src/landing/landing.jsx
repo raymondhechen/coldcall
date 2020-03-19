@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import Form from './form';
 import ProfileIcon from './profile.svg';
 import Arrow from './arrow';
 
@@ -77,6 +76,22 @@ const RightText = styled.div`
     width: 75%;
 `;
 
+const JoinButton = styled.input`
+    width: 30%;
+    height: 50px;
+    margin-top: -5vh;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    background: #19A4F2;
+    font-family: proxima-nova;
+    font-weight: 700;
+
+    :active {
+        background: #0086D1;
+    }
+`;
+
 const Picture = styled.div`
     width: 30vw;
     height: 40vh;
@@ -90,33 +105,42 @@ const Body2 = styled.div`
 `;
 
 
-export default () => (
-    <React.Fragment>
-        <Nav>
-            <Logo>
-                COLD CALL
-            </Logo>
-            <ProfileButton src={ProfileIcon}/>
-        </Nav>
+class Landing extends Component {
+    joinClick = () => {
+        this.props.history.push('/join');
+    }
 
-        <BodyWrapper>
-            <LeftWrapper>
-                <Picture/>
-            </LeftWrapper>
+    render() {
+        return (
+            <div>
+                <Nav>
+                    <Logo>
+                        COLD CALL
+                    </Logo>
+                    <ProfileButton src={ProfileIcon}/>
+                </Nav>
 
-            <RightWrapper>
-                <RightText>
-                    Want to meet the right people? 
-                    Let us connect you with the people you’re looking for.
-                </RightText>
-                Enter your .edu email
-                <Form/>
-            </RightWrapper>
-        </BodyWrapper>
+                <BodyWrapper>
+                    <LeftWrapper>
+                        <Picture/>
+                    </LeftWrapper>
 
-        <Arrow/>
+                    <RightWrapper>
+                        <RightText>
+                            Want to meet the right people? 
+                            Let us connect you with the people you’re looking for.
+                        </RightText>
+                        <JoinButton type="button" value="JOIN" onClick={e => this.joinClick(e)} />
+                    </RightWrapper>
+                </BodyWrapper>
 
-        <Body2/>
-    
-    </React.Fragment>
-);
+                <Arrow/>
+
+                <Body2/>
+            
+            </div>
+        )
+    }
+}
+
+export default Landing;
