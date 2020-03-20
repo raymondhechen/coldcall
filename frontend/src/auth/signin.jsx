@@ -120,88 +120,77 @@ const Button = styled.input`
     background: #19A4F2;
     font-family: proxima-nova;
     font-weight: 700;
+    transition: background-color 0.2s ease;
 
     :active {
         background: #0086D1;
     }
 `;
 
-class Authenticate extends Component {
+const ErrorMsg = styled.div`
+    color: red;
+`;
+
+class Signin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            new: true
+            email: "",
+            password: "",
+            valid: ""
         };
     }
+
 
     backClick = () => {
         this.props.history.push('/');
     }
 
+    handleEmailChange = (e) => {
+        this.setState({
+            email: e.target.value,
+        });
+    }
+
+    handlePassChange = (e) => {
+        this.setState({
+            password: e.target.value,
+        });
+    }
+
+    handleSubmit = () => {
+        if (this.state.valid === true) {
+            this.props.history.push('/home');
+        }
+    }
+
     render() {
-        if (this.state.new === true) {
-            return (
-                <div>
-                    <Nav>
-                        <Logo>
-                            COLD CALL
-                        </Logo>
-                        <XButton src={XIcon} onClick={e => this.backClick(e)}/>
-                    </Nav>
+        return (
+            <div>
+                <Nav>
+                    <Logo>
+                        COLD CALL
+                    </Logo>
+                    <XButton src={XIcon} onClick={e => this.backClick(e)}/>
+                </Nav>
 
-                    <BodyWrapper>
-                        <Title>
-                        SIGN UP
-                        </Title>
-                        <Subtitle>
-                        Email (.edu)
-                        </Subtitle>
-                        <TextBox/>
-                        <Subtitle>
-                        First Name
-                        </Subtitle>
-                        <TextBox/>
-                        <Subtitle>
-                        Last Name
-                        </Subtitle>
-                        <TextBox/>
-                        <Subtitle>
-                        Password
-                        </Subtitle>
-                        <PassTextBox/>
-                        <Button type="button" value="JOIN" />
-                    </BodyWrapper>
-                </div>
-            )
-        }
-        else {
-            return (
-                <div>
-                    <Nav>
-                        <Logo>
-                            COLD CALL
-                        </Logo>
-                        <XButton src={XIcon} onClick={e => this.backClick(e)}/>
-                    </Nav>
-
-                    <BodyWrapper>
-                        <Title>
-                        SIGN IN
-                        </Title>
-                        <Subtitle>
-                        Email
-                        </Subtitle>
-                        <TextBox/>
-                        <Subtitle>
-                        Password
-                        </Subtitle>
-                        <PassTextBox/>
-                        <Button type="button" value="ENTER" />
-                    </BodyWrapper>
-                </div>
-            );
-        }
+                <BodyWrapper>
+                    <Title>
+                    SIGN IN
+                    </Title>
+                    <Subtitle>
+                    Email
+                    </Subtitle>
+                    <TextBox value={this.state.email} onChange={e => this.handleEmailChange(e)}/>
+                    <Subtitle>
+                    Password
+                    </Subtitle>
+                    <PassTextBox value={this.state.password} onChange={e => this.handlePassChange(e)}/>
+                    <Button type="button" value="ENTER" onClick={this.handleSubmit()} />
+                </BodyWrapper>
+            </div>
+        );
     }
 }
 
-export default withRouter(Authenticate);
+export default withRouter(Signin);

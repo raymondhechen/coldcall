@@ -86,6 +86,7 @@ const JoinButton = styled.input`
     background: #19A4F2;
     font-family: proxima-nova;
     font-weight: 700;
+    transition: background-color 0.2s ease;
 
     :active {
         background: #0086D1;
@@ -110,6 +111,10 @@ class Landing extends Component {
         this.props.history.push('/join');
     }
 
+    signinClick = () => {
+        this.props.history.push('/signin');
+    }
+
     render() {
         return (
             <div>
@@ -117,7 +122,7 @@ class Landing extends Component {
                     <Logo>
                         COLD CALL
                     </Logo>
-                    <ProfileButton src={ProfileIcon}/>
+                    <ProfileButton src={ProfileIcon} onClick={e => this.signinClick(e)} />
                 </Nav>
 
                 <BodyWrapper>

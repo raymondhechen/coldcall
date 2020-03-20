@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Landing from './landing/landing';
-import Authenticate from './auth/authenticate';
+import Register from './auth/register';
+import Signin from './auth/signin';
 
 import './transitions.css'
 
@@ -19,7 +20,8 @@ function App() {
                     >
                         <Switch location={location}>
                             <Route exact path="/" component={Landing}/>
-                            <Route exact path="/join" component={Authenticate}/>
+                            <Route exact path="/join" component={Register}/>
+                            <Route exact path="/signin" component={Signin}/>
                         </Switch>
                     </CSSTransition>
             </TransitionGroup>

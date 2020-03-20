@@ -9,7 +9,6 @@ export default {
     */
     query(quertText, params) {
         console.log("request received");
-        console.log(quertText);
         console.log(params);
         return new Promise((resolve, reject) => {
         pool.query(quertText, params)
