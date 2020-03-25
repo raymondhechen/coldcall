@@ -16,3 +16,10 @@ To create the database, run these commands in terminal:
 - psql coldcall -af backend/database/create.sql
 - psql coldcall -af backend/database/load.sql
 
+
+
+## Tutorials
+### Backend
+- https://itnext.io/building-restful-api-with-node-js-express-js-and-postgresql-the-right-way-b2e718ad1c66
+- https://gist.github.com/laurenfazah/f9343ae8577999d301334fc68179b485
+
