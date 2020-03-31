@@ -8,7 +8,12 @@ First, we'll just some example data as a proof of concept. Then, to populate our
 
 The following schemas describe our database. Please refer to the ER diagram for a more intuitive structure. Please refer to the create.sql file for the exact implementation and primary keys.
 
-Availabilities(uid,start_time,end_time) Meetingspots(place,location_name) Reservations(student_uid,teacher_uid,start_time,end_time,place,location_name) Skills(uid,skill_name) Wants(uid,skill_name) Timeslots(start_time,end_time) Users(uid,name)
+- Availabilities(uid,start_time,end_time) 
+- Meetingspots(place,location_name) 
+- Reservations(student_uid,teacher_uid,start_time,end_time,place,location_name) 
+- Skills(uid,skill_name) 
+- Wants(uid,skill_name) 
+- Timeslots(start_time,end_time) Users(uid,name)
 
 Some assumptions we made about our data is that Users will have a name and will also have skills they can offer. We also assume that there are only specific locations on Duke campus where meetings can occur, which is currently a limitation we hope to expand. We also assume users will either be teacher or learner and will be able to have certain available times. "Learners" can see those available times can make reservations with the "teachers" accordingly. Reservations must contain all of this data to be specific, accurate, and informative to both parties.
 

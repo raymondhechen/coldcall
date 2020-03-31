@@ -17,6 +17,7 @@ const Nav = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: white;
 `;
 
 const Logo = styled.div`
@@ -259,7 +260,7 @@ class Landing extends Component {
                     </FooterLeft>
                     <FooterRight>
                         Designed and Built with ❤️ by <br/>
-                        Raymond Chen, Shrey Gupta, Sachin Jainshankar, Jeffrey Luo, Luke Qin
+                        Raymond Chen, Shrey Gupta, Sachin Jaishankar, Jeffrey Luo, Luke Qin
                     </FooterRight>
                 </Footer>
             </div>
