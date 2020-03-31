@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import ProfileIcon from './profile.svg';
 import Arrow from './arrow';
+import LandingDesign from './landingdesign.svg';
 
 const Nav = styled.div`
     position: fixed;
@@ -93,11 +94,10 @@ const JoinButton = styled.input`
     }
 `;
 
-const Picture = styled.div`
-    width: 30vw;
-    height: 40vh;
-    margin: 0 0 15vh 10vw;
-    background: #DDDCDC;
+const Picture = styled.img`
+    margin: 0 0 5vh 0;
+    width: 100%;
+    height: auto;
 `;
 
 
@@ -127,7 +127,7 @@ class Landing extends Component {
 
                 <BodyWrapper>
                     <LeftWrapper>
-                        <Picture/>
+                        <Picture src={LandingDesign} alt="design"/>
                     </LeftWrapper>
 
                     <RightWrapper>
