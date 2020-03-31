@@ -3,7 +3,10 @@ Connecting, Learning, and Empowering
 
 # Technical Details
 ## Frontend
-ReactJS
+ReactJS, Styled-Components
+### Setup Instructions
+- run `npm run start` for development build
+- run `npm run build` for deployment build
 
 ## Backend
 ExpressJS, PostgreSQL
