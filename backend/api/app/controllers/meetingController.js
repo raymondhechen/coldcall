@@ -1,7 +1,7 @@
 import moment from 'moment';
 import dbQuery from '../db/dbQuery';
-import { empty } from '../helpers/validations';
-import { errorMessage, successMessage, status } from '../helpers/status';
+import { empty } from '../middlewares/validations';
+import { errorMessage, successMessage, status } from '../middlewares/status';
 
 /**
  * Add A meeting

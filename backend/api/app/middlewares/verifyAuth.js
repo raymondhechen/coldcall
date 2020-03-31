@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { errorMessage, status } from '../helpers/status';
+import { errorMessage, status } from '../middlewares/status';
 
 dotenv.config();
 

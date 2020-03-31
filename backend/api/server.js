@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import cors from 'cors';
 import env from './env';
 
+import authRoute from './app/routes/authRoute';
 import usersRoute from './app/routes/usersRoute';
 import adminRoute from './app/routes/adminRoute';
 import meetingRoute from './app/routes/meetingRoute';
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 // add middleware for parsing JSON and urlencoded data and populating `req.body`
 app.use(express.json());
 
+app.use('/api', authRoute);
 app.use('/api', usersRoute);
 app.use('/api', adminRoute);
 app.use('/api', meetingRoute);
