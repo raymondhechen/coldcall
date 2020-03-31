@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { createBooking, getAllBookings, deleteBooking, updateBookingSeat } from '../controllers/bookingController';
+import { createBooking, getAllBookings, deleteBooking, updateBookingSeat } from '../controllers/meetingController';
 import verifyAuth from '../middlewares/verifyAuth';
 
 const router = express.Router();

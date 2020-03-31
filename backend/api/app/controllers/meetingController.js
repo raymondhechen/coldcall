@@ -1,23 +1,14 @@
 import moment from 'moment';
-
 import dbQuery from '../db/dbQuery';
-
-import {
-  empty,
-} from '../helpers/validations';
-
-
-import {
-  errorMessage, successMessage, status,
-} from '../helpers/status';
-
+import { empty } from '../helpers/validations';
+import { errorMessage, successMessage, status } from '../helpers/status';
 
 /**
-   * Add A Booking
-   * @param {object} req
-   * @param {object} res
-   * @returns {object} reflection object
-   */
+ * Add A meeting
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} reflection object
+ */
 const createBooking = async (req, res) => {
   const {
     trip_id, bus_id, trip_date, seat_number,
