@@ -140,12 +140,27 @@ class Register extends Component {
             lastName: "",
             password: "",
             validEmail: true,
-            validPassword: true
+            validPassword: true,
+            registered: false
         };
     }
 
+    // Back click function
     backClick() {
         this.props.history.push('/');
+    }
+
+    // handling textbox changes --> updating state
+    handleFirstChange = (e) => {
+        this.setState({
+            firstName: e.target.value,
+        });
+    }
+
+    handleLastChange = (e) => {
+        this.setState({
+            lastName: e.target.value,
+        });
     }
 
     handleEmailChange = (e) => {
@@ -160,6 +175,8 @@ class Register extends Component {
         });
     }
 
+    // this starts a chain of checks and submits: validate email --> validate password --> submit
+    // validate .edu email
     validateEmail() {
         var re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.+-]+\.edu$/g;
         var validEmailString = re.test(String(this.state.email).toLowerCase());
@@ -172,23 +189,22 @@ class Register extends Component {
 
         fetch('http://localhost:5000/api/users/email?email=' + this.state.email)
         .then(res => res.json())
-        .then(
-            (result) => {
-                if (result.status === "success") {
-                    this.setState({
-                        validEmail: false
-                    })
-                }
-                else {
-                    this.setState({
-                        validEmail: true
-                    })
-                    this.validatePassword();
-                }
+        .then((result) => {
+            if (result.status === "success") {
+                this.setState({
+                    validEmail: false
+                })
             }
-        )
+            else {
+                this.setState({
+                    validEmail: true
+                })
+                this.validatePassword();
+            }
+        });
     }
 
+    // validate password > 5 characters
     validatePassword() {
         if (this.state.password.length < 5) {
             this.setState({
@@ -199,28 +215,36 @@ class Register extends Component {
             this.setState({
                 validPassword: true
             });
-            this.submit();
+            this.submitRequest();
         }
     }
 
-    submit() {
-        if (this.state.validEmail && this.state.validPassword) {
-            const reqOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: this.state.email, first_name: this.state.firstName, last_name: this.state.lastName, password: this.state.password })
-            };
-            fetch('http://localhost:5000/api/auth/signup', reqOptions)
-            .then(response => response.json())
-            .catch( err => {
-                console.log(err)
-              });
-        }
-    }
-
-    handleSubmit() {
-        this.validateEmail();
-        // validateEmail --> validatePassword --> Submit
+    submitRequest() {
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: this.state.email, first_name: this.state.firstName, last_name: this.state.lastName, password: this.state.password })
+        };
+        fetch('http://localhost:5000/api/auth/signup', reqOptions)
+        .then((response) => {
+            return response;
+        })
+        .then(response =>
+            response.json().
+            then(json => ({
+                status: response.status,
+                json
+            })
+        ))
+        .then(({ status, json }) => {
+            console.log({ status, json });
+            if (status === 201) {
+                this.props.history.push('/welcome');
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        });
     }
 
     render() {
@@ -248,11 +272,11 @@ class Register extends Component {
                     <Subtitle>
                     First Name
                     </Subtitle>
-                    <TextBox/>
+                    <TextBox value={this.state.firstName} onChange={e => this.handleFirstChange(e)}/>
                     <Subtitle>
                     Last Name
                     </Subtitle>
-                    <TextBox/>
+                    <TextBox value={this.state.lastName} onChange={e => this.handleLastChange(e)}/>
                     <Subtitle>
                     Password
                     </Subtitle>
@@ -261,7 +285,7 @@ class Register extends Component {
                     null
                     }
                     <PassTextBox value={this.state.password} onChange={e => this.handlePassChange(e)}/>
-                    <Button type="button" value="JOIN" onClick={e => this.handleSubmit(e)} />
+                    <Button type="button" value="JOIN" onClick={e => this.validateEmail(e)} />
                 </BodyWrapper>
             </div>
         );

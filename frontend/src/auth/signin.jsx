@@ -137,12 +137,11 @@ class Signin extends Component {
         this.state = {
             email: "",
             password: "",
-            valid: ""
+            validAccount: true
         };
     }
 
-
-    backClick = () => {
+    backClick() {
         this.props.history.push('/');
     }
 
@@ -158,10 +157,37 @@ class Signin extends Component {
         });
     }
 
-    handleSubmit = () => {
-        if (this.state.valid === true) {
-            this.props.history.push('/home');
-        }
+    handleSubmit() {
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: this.state.email, password: this.state.password })
+        };
+        fetch('http://localhost:5000/api/auth/signin', reqOptions)
+        .then((response) => {
+            return response;
+        })
+        .then(response =>
+            response.json().
+            then(json => ({
+                status: response.status,
+                json
+            })
+        ))
+        .then(({ status, json }) => {
+            console.log({ status, json });
+            if (status === 200) {
+                this.props.history.push('/welcome');
+            }
+            else {
+                this.setState({
+                    validAccount: false
+                })
+            }
+        })
+        .catch((error) => {
+            console.log(error)
+        });
     }
 
     render() {
@@ -186,7 +212,11 @@ class Signin extends Component {
                     Password
                     </Subtitle>
                     <PassTextBox value={this.state.password} onChange={e => this.handlePassChange(e)}/>
-                    <Button type="button" value="ENTER" onClick={this.handleSubmit()} />
+                    {!this.state.validAccount ? 
+                    <ErrorMsg>Email address or password is invalid</ErrorMsg> : 
+                    null
+                    }
+                    <Button type="button" value="ENTER" onClick={e => this.handleSubmit(e)} />
                 </BodyWrapper>
             </div>
         );

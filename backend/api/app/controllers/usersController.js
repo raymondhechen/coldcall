@@ -103,4 +103,4 @@ const searchSkill = async (req, res) => {
     }
 };
 
-export { searchEmail, searchFirstnameOrLastname, searchTopic, searchSkills };
+export { searchEmail, searchFirstnameOrLastname, searchTopic, searchSkill };

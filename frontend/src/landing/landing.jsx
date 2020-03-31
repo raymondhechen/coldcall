@@ -197,7 +197,7 @@ const FooterRight = styled.div`
 
 class Landing extends Component {
     joinClick = () => {
-        this.props.history.push('/join');
+        this.props.history.push('/signup');
     }
 
     signinClick = () => {

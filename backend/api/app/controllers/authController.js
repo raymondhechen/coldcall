@@ -32,7 +32,7 @@ const createUser = async (req, res) => {
     const createUserQuery = 
         `
         INSERT INTO
-        users(email, first_name, last_name, password, created_on)
+        users(email, first_name, last_name, password, created)
         VALUES($1, $2, $3, $4, $5)
         returning *
         `;

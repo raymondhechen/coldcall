@@ -1,13 +1,7 @@
 import moment from 'moment';
 import dbQuery from '../db/dbQuery';
 import { errorMessage, successMessage, status } from '../middlewares/status';
-import {
-  hashPassword,
-  isValidEmail,
-  validatePassword,
-  isEmpty,
-  generateUserToken,
-} from '../middlewares/validations';
+import { hashPassword, isValidEmail, validatePassword, isEmpty, generateUserToken } from '../middlewares/validations';
 
 /**
    * Create an admin
