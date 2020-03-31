@@ -9,7 +9,7 @@ import { errorMessage, successMessage, status } from '../middlewares/status';
  */ 
 const searchEmail = async (req, res) => {
     const { email } = req.query;
-    const searchQuery = 'SELECT * from users WHERE email = $1 ORDER BY id DESC';
+    const searchQuery = 'SELECT * from users WHERE email = $1 ORDER BY last_name DESC';
     try {
         const { rows } = await dbQuery.query(searchQuery, [email]);
         const dbResponse = rows;
@@ -34,7 +34,7 @@ const searchEmail = async (req, res) => {
  */ 
 const searchFirstnameOrLastname = async (req, res) => {
     const { first_name, last_name } = req.query;
-    const searchQuery = 'SELECT * FROM users WHERE first_name = $1 OR last_name = $2 ORDER BY id DESC';
+    const searchQuery = 'SELECT * FROM users WHERE first_name = $1 OR last_name = $2 ORDER BY last_name DESC';
 
     try {
         const { rows } = await dbQuery.query(searchQuery, [first_name, last_name]);
@@ -60,13 +60,13 @@ const searchFirstnameOrLastname = async (req, res) => {
  * @returns users with topics
  */ 
 const searchTopic = async (req, res) => {
-    const { email } = req.query;
-    const searchQuery = 'SELECT * from users WHERE email = $1 ORDER BY id DESC';
+    const { topic } = req.query;
+    const searchQuery = 'SELECT * FROM Users as u JOIN HasSkill as h ON u.uid = h.uid JOIN Skills as s ON h.sid = s.sid WHERE s.topic = $1 ORDER BY last_name DESC';
     try {
-        const { rows } = await dbQuery.query(searchQuery, [email]);
+        const { rows } = await dbQuery.query(searchQuery, [topic]);
         const dbResponse = rows;
         if (!dbResponse[0]) {
-            errorMessage.error = 'No user with such email';
+            errorMessage.error = 'No user with such topic';
             return res.status(status.notfound).send(errorMessage);
         }
         successMessage.data = dbResponse;
@@ -84,14 +84,14 @@ const searchTopic = async (req, res) => {
  * @params {Object} res
  * @returns users with skills
  */ 
-const searchSkills = async (req, res) => {
-    const { email } = req.query;
-    const searchQuery = 'SELECT * from users WHERE email = $1 ORDER BY id DESC';
+const searchSkill = async (req, res) => {
+    const { skill } = req.query;
+    const searchQuery = 'SELECT * FROM Users as u JOIN HasSkill as h ON u.uid = h.uid JOIN Skills as s ON h.sid = s.sid WHERE s.skill_name = $1 ORDER BY last_name DESC';
     try {
-        const { rows } = await dbQuery.query(searchQuery, [email]);
+        const { rows } = await dbQuery.query(searchQuery, [skill]);
         const dbResponse = rows;
         if (!dbResponse[0]) {
-            errorMessage.error = 'No user with such email';
+            errorMessage.error = 'No user with such skill';
             return res.status(status.notfound).send(errorMessage);
         }
         successMessage.data = dbResponse;

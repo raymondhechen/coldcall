@@ -63,18 +63,21 @@ const reservationCreateQuery =
 CREATE TABLE IF NOT EXISTS Reservations (
     rid SERIAL PRIMARY KEY,
     student_id SERIAL NOT NULL REFERENCES Users(uid),
-    teacher_id SERIAL NOT NULL REFERENCES Users(uid),
+    teacher_id SERIAL NOT NULL REFERENCES Users(uid) CHECK (student_id <> teacher_id),
     start_time DATE NOT NULL,
     end_time DATE NOT NULL CHECK (end_time > start_time),
     sid SERIAL NOT NULL REFERENCES Skills(sid), 
-    location VARCHAR(256) NOT NULL REFERENCES Locations(loc_name)
+    lid SERIAL NOT NULL REFERENCES Locations(lid), 
+    finished BOOLEAN NOT NULL,
+    time_created DATE NOT NULL
 )
 `;
 
 const locationsCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS Locations (
-    loc_name VARCHAR(256) PRIMARY KEY,
+    lid SERIAL PRIMARY KEY,
+    loc_name VARCHAR(256) NOT NULL,
     place VARCHAR(256) NOT NULL
 )
 `;

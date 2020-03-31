@@ -4,170 +4,186 @@ import { empty } from '../middlewares/validations';
 import { errorMessage, successMessage, status } from '../middlewares/status';
 
 /**
- * Add A meeting
+ * Create a reservation
  * @param {object} req
  * @param {object} res
  * @returns {object} reflection object
  */
-const createBooking = async (req, res) => {
-  const {
-    trip_id, bus_id, trip_date, seat_number,
-  } = req.body;
+const createReservation = async (req, res) => {
+    const { teacher_id, start_time, end_time, sid, lid } = req.body;
+    const { uid } = req.user;
+    const created_on = moment(new Date());
 
-  const {
-    first_name, last_name, user_id, email,
-  } = req.user;
-  const created_on = moment(new Date());
-
-  if (empty(trip_id)) {
-    errorMessage.error = 'Trip is required';
-    return res.status(status.bad).send(errorMessage);
-  }
-  const createBookingQuery = `INSERT INTO
-          booking(user_id, trip_id, bus_id, trip_date, seat_number, first_name, last_name, email, created_on)
-          VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
-          returning *`;
-  const values = [
-    user_id,
-    trip_id,
-    bus_id,
-    trip_date,
-    seat_number,
-    first_name,
-    last_name,
-    email,
-    created_on,
-  ];
-
-  try {
-    const { rows } = await dbQuery.query(createBookingQuery, values);
-    const dbResponse = rows[0];
-    successMessage.data = dbResponse;
-    return res.status(status.created).send(successMessage);
-  } catch (error) {
-    if (error.routine === '_bt_check_unique') {
-      errorMessage.error = 'Seat Number is taken already';
-      return res.status(status.conflict).send(errorMessage);
+    if (empty(student_id) || empty(teacher_id) || empty(start_time) || empty(end_time)) {
+        errorMessage.error = 'Missing information';
+        return res.status(status.bad).send(errorMessage);
     }
-    errorMessage.error = 'Unable to create booking';
-    return res.status(status.error).send(errorMessage);
-  }
-};
+    
+    const createReservationQuery = 
+    `
+        INSERT INTO
+        Reservations(student_id, teacher_id, start_time, end_time, sid, lid, finished, time_created)
+        VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+        returning *
+    `;
+    const values = [
+        uid,
+        teacher_id,
+        start_time, 
+        end_time, 
+        sid, 
+        lid,
+        0, 
+        created_on
+    ];
 
-/**
-   * Get All Bookings
-   * @param {object} req 
-   * @param {object} res 
-   * @returns {object} buses array
-   */
-const getAllBookings = async (req, res) => {
-  const { is_admin, user_id } = req.user;
-  if (!is_admin === true) {
-    const getAllBookingsQuery = 'SELECT * FROM booking WHERE user_id = $1';
     try {
-      const { rows } = await dbQuery.query(getAllBookingsQuery, [user_id]);
-      const dbResponse = rows;
-      if (dbResponse[0] === undefined) {
-        errorMessage.error = 'You have no bookings';
-        return res.status(status.notfound).send(errorMessage);
-      }
-      successMessage.data = dbResponse;
-      return res.status(status.success).send(successMessage);
-    } catch (error) {
-      errorMessage.error = 'An error Occured';
-      return res.status(status.error).send(errorMessage);
+        const { rows } = await dbQuery.query(createReservationQuery, values);
+        const dbResponse = rows[0];
+        successMessage.data = dbResponse;
+        return res.status(status.created).send(successMessage);
+    } 
+    catch (error) {
+        errorMessage.error = 'Unable to create booking';
+        return res.status(status.error).send(errorMessage);
     }
-  }
-  const getAllBookingsQuery = 'SELECT * FROM booking ORDER BY id DESC';
-  try {
-    const { rows } = await dbQuery.query(getAllBookingsQuery);
-    const dbResponse = rows;
-    if (dbResponse[0] === undefined) {
-      errorMessage.error = 'There are no bookings';
-      return res.status(status.bad).send(errorMessage);
-    }
-    successMessage.data = dbResponse;
-    return res.status(status.success).send(successMessage);
-  } catch (error) {
-    errorMessage.error = 'An error Occured';
-    return res.status(status.error).send(errorMessage);
-  }
 };
 
 /**
-   * Delete A Booking
-   * @param {object} req 
-   * @param {object} res 
-   * @returns {void} return response booking deleted successfully
-   */
-const deleteBooking = async (req, res) => {
-  const { bookingId } = req.params;
-  const { user_id } = req.user;
-  const deleteBookingQuery = 'DELETE FROM booking WHERE id=$1 AND user_id = $2 returning *';
-  try {
-    const { rows } = await dbQuery.query(deleteBookingQuery, [bookingId, user_id]);
-    const dbResponse = rows[0];
-    if (!dbResponse) {
-      errorMessage.error = 'You have no booking with that id';
-      return res.status(status.notfound).send(errorMessage);
-    }
-    successMessage.data = {};
-    successMessage.data.message = 'Booking deleted successfully';
-    return res.status(status.success).send(successMessage);
-  } catch (error) {
-    return res.status(status.error).send(error);
-  }
-};
-
-/**
- * Update A User to Admin
+ * Get all reservations
  * @param {object} req 
  * @param {object} res 
- * @returns {object} updated user
+ * @returns {object} buses array
  */
-const updateBookingSeat = async (req, res) => {
-  const { bookingId } = req.params;
-  const { seat_number } = req.body;
+const getReservations = async (req, res) => {
+    const { uid } = req.user;
+    const getReservationsQuery = 'SELECT * FROM Reservations WHERE student_id = $1 OR teacher_id = $1 ORDER BY start_time ASC';
+    
+    try {
+        const { rows } = await dbQuery.query(getReservationsQuery, [uid]);
+        const dbResponse = rows;
+        if (dbResponse[0] === undefined) {
+            errorMessage.error = 'No reservations';
+            return res.status(status.notfound).send(errorMessage);
+        }
+        successMessage.data = dbResponse;
+        return res.status(status.success).send(successMessage);
+    } 
+    catch (error) {
+        errorMessage.error = 'An error Occured';
+        return res.status(status.error).send(errorMessage);
+    }
+};
 
-  const { user_id } = req.user;
+/**
+ * Get all learnings
+ * @param {object} req 
+ * @param {object} res 
+ * @returns {object} buses array
+ */
+const getLearnings = async (req, res) => {
+    const { uid } = req.user;
+    const getReservationsQuery = 'SELECT * FROM Reservations WHERE student_id = $1 ORDER BY start_time ASC';
+    
+    try {
+        const { rows } = await dbQuery.query(getReservationsQuery, [uid]);
+        const dbResponse = rows;
+        if (dbResponse[0] === undefined) {
+            errorMessage.error = 'No learnings';
+            return res.status(status.notfound).send(errorMessage);
+        }
+        successMessage.data = dbResponse;
+        return res.status(status.success).send(successMessage);
+    } 
+    catch (error) {
+        errorMessage.error = 'An error Occured';
+        return res.status(status.error).send(errorMessage);
+    }
+};
 
-  if (empty(seat_number)) {
-    errorMessage.error = 'Seat Number is needed';
-    return res.status(status.bad).send(errorMessage);
-  }
-  const findBookingQuery = 'SELECT * FROM booking WHERE id=$1';
-  const updateBooking = `UPDATE booking
-        SET seat_number=$1 WHERE user_id=$2 AND id=$3 returning *`;
+/**
+ * Get all reservations
+ * @param {object} req 
+ * @param {object} res 
+ * @returns {object} buses array
+ */
+const getTeachings = async (req, res) => {
+    const { uid } = req.user;
+    const getReservationsQuery = 'SELECT * FROM Reservations WHERE teacher_id = $1 ORDER BY start_time ASC';
+    
+    try {
+        const { rows } = await dbQuery.query(getReservationsQuery, [uid]);
+        const dbResponse = rows;
+        if (dbResponse[0] === undefined) {
+            errorMessage.error = 'No teachings';
+            return res.status(status.notfound).send(errorMessage);
+        }
+        successMessage.data = dbResponse;
+        return res.status(status.success).send(successMessage);
+    } 
+    catch (error) {
+        errorMessage.error = 'An error Occured';
+        return res.status(status.error).send(errorMessage);
+    }
+};
+
+/**
+ * Delete learning reservation
+ * @param {object} req 
+ * @param {object} res 
+ * @returns {void} return response booking deleted successfully
+ */
+const deleteLearning = async (req, res) => {
+  const { rid } = req.params;
+  const { uid } = req.user;
+  const deleteLearningQuery = 'DELETE FROM Reservations WHERE rid = $1 AND student_id = $2 returning *';
   try {
-    const { rows } = await dbQuery.query(findBookingQuery, [bookingId]);
-    const dbResponse = rows[0];
-    if (!dbResponse) {
-      errorMessage.error = 'Booking Cannot be found';
-      return res.status(status.notfound).send(errorMessage);
-    }
-    const values = [
-      seat_number,
-      user_id,
-      bookingId,
-    ];
-    const response = await dbQuery.query(updateBooking, values);
-    const dbResult = response.rows[0];
-    delete dbResult.password;
-    successMessage.data = dbResult;
-    return res.status(status.success).send(successMessage);
-  } catch (error) {
-    if (error.routine === '_bt_check_unique') {
-      errorMessage.error = 'Seat Number is taken already';
-      return res.status(status.conflict).send(errorMessage);
-    }
-    errorMessage.error = 'Operation was not successful';
-    return res.status(status.error).send(errorMessage);
+        const { rows } = await dbQuery.query(deleteLearningQuery, [rid, uid]);
+        const dbResponse = rows[0];
+        if (!dbResponse) {
+        errorMessage.error = 'You have no learnings with that id';
+        return res.status(status.notfound).send(errorMessage);
+        }
+        successMessage.data = {};
+        successMessage.data.message = 'Reservation deleted successfully';
+        return res.status(status.success).send(successMessage);
+    } 
+    catch (error) {
+        return res.status(status.error).send(error);
   }
 };
 
+/**
+ * Delete teaching reservation
+ * @param {object} req 
+ * @param {object} res 
+ * @returns {void} return response booking deleted successfully
+ */
+const deleteTeaching = async (req, res) => {
+    const { rid } = req.params;
+    const { uid } = req.user;
+    const deleteTeachingQuery = 'DELETE FROM Reservations WHERE rid = $1 AND teacher_id = $2 returning *';
+    try {
+        const { rows } = await dbQuery.query(deleteTeachingQuery, [rid, uid]);
+        const dbResponse = rows[0];
+        if (!dbResponse) {
+            errorMessage.error = 'You have no teachings with that id';
+            return res.status(status.notfound).send(errorMessage);
+        }
+        successMessage.data = {};
+        successMessage.data.message = 'Reservation deleted successfully';
+        return res.status(status.success).send(successMessage);
+    } catch (error) {
+        return res.status(status.error).send(error);
+    }
+};
+
+
 export {
-  createBooking,
-  getAllBookings,
-  deleteBooking,
-  updateBookingSeat,
+    createReservation,
+    getReservations,
+    getLearnings,
+    getTeachings,
+    deleteLearning,
+    deleteTeaching
 };
