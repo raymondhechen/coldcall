@@ -1,5 +1,5 @@
 import moment from 'moment';
-import dbQuery from '../db/dev/dbQuery';
+import dbQuery from '../db/dbQuery';
 import { errorMessage, successMessage, status } from '../helpers/status';
 import {
   hashPassword,
