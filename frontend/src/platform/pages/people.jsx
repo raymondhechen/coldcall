@@ -53,7 +53,6 @@ const BodyWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     
     margin-top: 10vh;
     height: 85vh;
