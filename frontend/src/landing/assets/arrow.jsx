@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './arrow.css';
-import ArrowIcon from './arrow.svg'
+import ArrowIcon from './arrow.svg';
 
 class Arrow extends Component {
     render() {

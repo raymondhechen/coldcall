@@ -190,6 +190,12 @@ class Signin extends Component {
         });
     }
 
+    handleEnterKey = (e) => {
+        if (e.key === 'Enter') {
+            this.handleSubmit();
+        }
+    }
+
     render() {
         return (
             <div>
@@ -207,11 +213,11 @@ class Signin extends Component {
                     <Subtitle>
                     Email
                     </Subtitle>
-                    <TextBox value={this.state.email} onChange={e => this.handleEmailChange(e)}/>
+                    <TextBox value={this.state.email} onKeyPress={this.handleEnterKey} onChange={e => this.handleEmailChange(e)}/>
                     <Subtitle>
                     Password
                     </Subtitle>
-                    <PassTextBox value={this.state.password} onChange={e => this.handlePassChange(e)}/>
+                    <PassTextBox value={this.state.password} onKeyPress={this.handleEnterKey} onChange={e => this.handlePassChange(e)}/>
                     {!this.state.validAccount ? 
                     <ErrorMsg>Email address or password is invalid</ErrorMsg> : 
                     null

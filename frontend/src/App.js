@@ -5,7 +5,7 @@ import Landing from './landing/landing';
 import Register from './auth/register';
 import Signin from './auth/signin';
 import Welcome from './auth/entry';
-import Home from './platform/home'
+import Home from './platform/pages/home'
 
 import './transitions.css'
 

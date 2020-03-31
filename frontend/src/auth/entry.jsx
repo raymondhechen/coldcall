@@ -51,15 +51,6 @@ class Welcome extends Component {
                 <Logo>
                     COLD CALL
                 </Logo>
-                {this.state.newUser ? 
-                    <WelcomeMsg>
-                        Welcome 
-                    </WelcomeMsg> 
-                    : 
-                    <WelcomeMsg>
-                        Welcome Back
-                    </WelcomeMsg>
-                }
                 <div className="lds-facebook">
                     <div></div>
                     <div></div>

@@ -247,6 +247,12 @@ class Register extends Component {
         });
     }
 
+    handleEnterKey = (e) => {
+        if (e.key === 'Enter') {
+            this.validateEmail();
+        }
+    }
+
     render() {
         return (
             <div>
@@ -268,15 +274,15 @@ class Register extends Component {
                     <ErrorMsg>Email address is either used or not an .edu address</ErrorMsg> : 
                     null
                     }
-                    <TextBox value={this.state.email} onChange={e => this.handleEmailChange(e)}/>
+                    <TextBox value={this.state.email} onKeyPress={this.handleEnterKey} onChange={e => this.handleEmailChange(e)}/>
                     <Subtitle>
                     First Name
                     </Subtitle>
-                    <TextBox value={this.state.firstName} onChange={e => this.handleFirstChange(e)}/>
+                    <TextBox value={this.state.firstName} onKeyPress={this.handleEnterKey} onChange={e => this.handleFirstChange(e)}/>
                     <Subtitle>
                     Last Name
                     </Subtitle>
-                    <TextBox value={this.state.lastName} onChange={e => this.handleLastChange(e)}/>
+                    <TextBox value={this.state.lastName} onKeyPress={this.handleEnterKey} onChange={e => this.handleLastChange(e)}/>
                     <Subtitle>
                     Password
                     </Subtitle>
@@ -284,7 +290,7 @@ class Register extends Component {
                     <ErrorMsg>Password must be at least 5 characters</ErrorMsg> : 
                     null
                     }
-                    <PassTextBox value={this.state.password} onChange={e => this.handlePassChange(e)}/>
+                    <PassTextBox value={this.state.password} onKeyPress={this.handleEnterKey} onChange={e => this.handlePassChange(e)}/>
                     <Button type="button" value="JOIN" onClick={e => this.validateEmail(e)} />
                 </BodyWrapper>
             </div>

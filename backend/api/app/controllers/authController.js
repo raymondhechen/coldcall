@@ -43,11 +43,8 @@ const createUser = async (req, res) => {
         const { rows } = await dbQuery.query(createUserQuery, values);
         const dbResponse = rows[0];
         console.log(dbResponse);
-        console.log("1");
         delete dbResponse.password;
-        console.log("1.5");
         const token = generateUserToken(dbResponse.email, dbResponse.id, dbResponse.is_admin, dbResponse.first_name, dbResponse.last_name);
-        console.log("2");
         successMessage.data = dbResponse;
         successMessage.data.token = token;
         console.log("success");

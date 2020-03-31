@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import ProfileIcon from './profile.svg';
-import Arrow from './arrow';
-import LandingDesign from './landingdesign.svg';
-import Duke from './duke.jpg';
+import ProfileIcon from './assets/profile.svg';
+import Arrow from './assets/arrow';
+import LandingDesign from './assets/landingdesign.svg';
+import Duke from './assets/duke.jpg';
 
 const Nav = styled.div`
     position: fixed;
@@ -32,6 +32,7 @@ const Logo = styled.div`
     align-items: center;
     text-align: center;
     width: 50%;
+    cursor: default;
 
     color: #2F80ED;
 `;
