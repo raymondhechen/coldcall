@@ -113,7 +113,6 @@ const Button = styled.input`
     width: 15%;
     max-width: 100px;
     height: 48px;
-    padding-bottom: 1px;
     border-radius: 5px;
     border: 0;
     outline: none;
