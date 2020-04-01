@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ProfileIcon from '../../landing/assets/profile.svg';
 import NavBar from '../components/navbar';
+import SearchBox from '../components/SearchBox.js';
+import Scroll from '../components/Scroll.js';
+import UserCardList from '../components/UserCardList.js';
 
 const Nav = styled.div`
     position: fixed;
@@ -71,12 +74,32 @@ const FooterText = styled.div`
 `
 
 class People extends Component {
-    componentWillMount() {
+    constructor() {
+        super()
+        this.state = {
+            users: [],
+            searchfield: ''
+        }
+    }
 
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => this.setState({ users: users }));
+    }
+
+    onSearchChange = (event) => {
+        this.setState({ searchfield: event.target.value });
     }
 
     render() {
-        return (
+        const { users, searchfield } = this.state;
+        const filteredUsers = users.filter(user => {
+            return user.name.toLowerCase().includes(searchfield.toLowerCase());
+        })
+        return !users.length ?
+        <h1 className='tc f1'>Loading</h1> :
+        (
             <div>
                 <Nav>
                     <Logo>
@@ -87,7 +110,10 @@ class People extends Component {
                 </Nav>
 
                 <BodyWrapper>
-                    
+                    <SearchBox searchChange={this.onSearchChange}/>
+                    <Scroll>
+                        <UserCardList users={filteredUsers}/>
+                    </Scroll>
                 </BodyWrapper>
 
                 <Footer>

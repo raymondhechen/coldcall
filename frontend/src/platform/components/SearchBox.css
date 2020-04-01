@@ -1,0 +1,13 @@
+input {
+    width: 100%;
+    max-width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    font-family: proxima-nova;
+    font-weight: 700;
+    background: #E0E0E0;
+}
