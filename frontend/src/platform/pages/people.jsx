@@ -1,51 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import ProfileIcon from '../../landing/assets/profile.svg';
+import { withRouter } from "react-router-dom";
 import NavBar from '../components/navbar';
-import UserCardList from '../components/UserCardList.js';
-
-const Nav = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 15vh;
-    z-index: 99;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: white;
-`;
-
-const Logo = styled.div`
-    padding: 0 0 0 5vw;
-
-    font-family: Lato;
-    font-weight: 900;
-    font-size: 40px;
-    line-height: 60px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    width: 35%;
-    cursor: default;
-
-    color: #2F80ED;
-`;
-
-const ProfileButton = styled.img`
-    background: #2F80ED;
-    border-radius: 50%;
-    margin: 3.5vh 7.5vw 0 0;
-
-    display: flex;
-    height: 50px;
-
-    :hover {
-        cursor: pointer;
-    }
-`;
+import UserCardList from '../components/UserCardList';
+import Footer from '../components/footer';
 
 const BodyWrapper = styled.div`    
     margin-top: 5vh;
@@ -74,20 +32,6 @@ const SearchBox = styled.input`
     font-weight: 700;
     background: #E0E0E0;
 `;
-
-const Footer = styled.div`
-    margin-top: 10vh;
-    height: 12.5vh;
-    background-color: #4F4F4F;
-`
-
-const FooterText = styled.div`
-    color: #E0E0E0;
-    font-family: Lato;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 5vh 0 0 2.5vw;
-`
 
 class People extends Component {
     constructor() {
@@ -129,20 +73,14 @@ class People extends Component {
                 })
         }
         else {
-            var filteredResults = this.state.users.filter(user => {
+            filteredResults = this.state.users.filter(user => {
                 return user.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
             })
         }
 
         return (
             <div>
-                <Nav>
-                    <Logo>
-                        COLD CALL
-                    </Logo>
-                    <NavBar/>
-                    <ProfileButton src={ProfileIcon} />
-                </Nav>
+                <NavBar/>
 
                 <BodyWrapper>
                     <SearchWrapper>
@@ -152,14 +90,10 @@ class People extends Component {
                     <UserCardList users={filteredResults}/>
                 </BodyWrapper>
 
-                <Footer>
-                    <FooterText>
-                        © Cold Call 2020
-                    </FooterText>
-                </Footer>
+                <Footer/>
             </div>
         )
     }
 }
 
-export default People;
+export default withRouter(People);

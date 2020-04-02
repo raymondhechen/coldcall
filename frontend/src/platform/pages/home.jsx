@@ -1,100 +1,85 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import ProfileIcon from '../../landing/assets/profile.svg';
 import NavBar from '../components/navbar';
-
-const Nav = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 15vh;
-    z-index: 99;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: white;
-`;
-
-const Logo = styled.div`
-    padding: 0 0 0 5vw;
-
-    font-family: Lato;
-    font-weight: 900;
-    font-size: 40px;
-    line-height: 60px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    width: 35%;
-    cursor: default;
-
-    color: #2F80ED;
-`;
-
-const ProfileButton = styled.img`
-    background: #2F80ED;
-    border-radius: 50%;
-    margin: 3.5vh 7.5vw 0 0;
-
-    display: flex;
-    height: 50px;
-
-    :hover {
-        cursor: pointer;
-    }
-`;
+import Footer from '../components/footer';
+import SmallCardList from '../components/SmallCardList';
 
 const BodyWrapper = styled.div`
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     
-    margin-top: 10vh;
-    height: 85vh;
+    margin-top: 20vh;
+    min-height: 70vh;
 `;
 
-const Footer = styled.div`
-    height: 10vh;
-    background-color: #4F4F4F;
-    display: flex;
-`
-
-const FooterText = styled.div`
-    color: #E0E0E0;
+const PeopleTitle = styled.div`
+    padding: 0 0 0 5vw;
     font-family: Lato;
-    font-weight: 500;
-    font-size: 15px;
-    padding: 5vh 0 0 2.5vw;
-    width: 125vw;
-`
+    font-weight: 700;
+    font-size: 30px;
+`;
+
+const PeopleWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 30vh;
+`;
+
+const ReservationsTitle = styled.div`
+    padding: 0 0 0 5vw;
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 30px;
+`;
+
+const ReservationsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+`;
+
 
 class Home extends Component {
-    componentWillMount() {
+    constructor() {
+        super()
+        this.state = {
+            fiveUsers: []
+        }
+    }
 
+    componentDidMount() {
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response => response.json())
+        .then(users => this.setState({ 
+            fiveUsers: [users[0], users[1], users[2], users[3], users[4]]
+        }));
     }
 
     render() {
         return (
             <div>
-                <Nav>
-                    <Logo>
-                        COLD CALL
-                    </Logo>
-                    <NavBar/>
-                    <ProfileButton src={ProfileIcon} />
-                </Nav>
+                <NavBar/>
 
                 <BodyWrapper>
-                    
+                    <PeopleTitle>
+                        Featured People
+                    </PeopleTitle>
+                    <PeopleWrapper>
+                        <SmallCardList users={this.state.fiveUsers}/>
+                    </PeopleWrapper>
+
+                    <ReservationsTitle>
+                        Your Reserved Meetings
+                    </ReservationsTitle>
+                    <ReservationsWrapper>
+
+                    </ReservationsWrapper>
                 </BodyWrapper>
 
-                <Footer>
-                    <FooterText>
-                        © Cold Call 2020
-                    </FooterText>
-                </Footer>
+                <Footer/>
             </div>
         )
     }

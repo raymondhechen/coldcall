@@ -6,9 +6,9 @@ const Container = styled.div`
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    min-width: 225px;
-    width: 17.5vw;
-    height: 35vh;
+    min-width: 150px;
+    width: 10vw;
+    height: 20vh;
     margin: 2.5vh 2vw 2.5vh 2vw;
     transition: background-color 0.2s ease-in-out;
     text-align: center;
@@ -22,31 +22,23 @@ const Container = styled.div`
 
 const Avatar = styled.img` 
     width: auto;
-    height: 20vh;
-    min-width: 225px;
+    height: 12.5vh;
     margin: 0 0 2.5vh 0;
 `;
 
 const Name = styled.div`
     font-family: Lato;
     font-weight: 500;
-    font-size: 22.5px;
+    font-size: 17.5px;
 `;
 
-const Email = styled.div`
-    font-family: Lato;
-    font-weight: 500;
-    font-size: 15px;
-`;
-
-const UserCard = ({ name, email, id }) => {
+const SmallCard = ({ name, email, id }) => {
     return (
         <Container>
             <Avatar src={`https://robohash.org/${id}?50x50`} alt="user" />
             <Name>{name}</Name>
-            <Email>{email}</Email>
         </Container>
     );
 }
 
-export default UserCard;
+export default SmallCard;
