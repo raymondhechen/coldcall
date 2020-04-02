@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ProfileIcon from '../../landing/assets/profile.svg';
 import NavBar from '../components/navbar';
-import SearchBox from '../components/SearchBox.js';
-import Scroll from '../components/Scroll.js';
 import UserCardList from '../components/UserCardList.js';
 
 const Nav = styled.div`
@@ -49,19 +47,38 @@ const ProfileButton = styled.img`
     }
 `;
 
-const BodyWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
+const BodyWrapper = styled.div`    
+    margin-top: 5vh;
     align-items: center;
-    
-    margin-top: 10vh;
-    height: 85vh;
+    text-align: center;
+    min-height: 72.5vh;
+`;
+
+const SearchWrapper = styled.div`
+    padding-top: 15vh;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-evenly;
+`;
+
+const SearchBox = styled.input`
+    width: 35%;
+    max-width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    font-family: proxima-nova;
+    font-weight: 700;
+    background: #E0E0E0;
 `;
 
 const Footer = styled.div`
-    height: 10vh;
+    margin-top: 10vh;
+    height: 12.5vh;
     background-color: #4F4F4F;
-    display: flex;
 `
 
 const FooterText = styled.div`
@@ -70,7 +87,6 @@ const FooterText = styled.div`
     font-weight: 500;
     font-size: 15px;
     padding: 5vh 0 0 2.5vw;
-    width: 125vw;
 `
 
 class People extends Component {
@@ -78,28 +94,47 @@ class People extends Component {
         super()
         this.state = {
             users: [],
-            searchfield: ''
+            searchfield: '',
+            emailSearch: false
         }
     }
 
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => this.setState({ users: users }));
+        .then(response => response.json())
+        .then(users => this.setState({ 
+            users: users
+        }));
     }
 
-    onSearchChange = (event) => {
+    onSearchChange = (event, emailBool) => {
         this.setState({ searchfield: event.target.value });
+        if (emailBool === true) {
+            this.setState({
+                emailSearch: true
+            })
+        }
+        else {
+            this.setState({
+                emailSearch: false
+            })
+        }
     }
 
     render() {
-        const { users, searchfield } = this.state;
-        const filteredUsers = users.filter(user => {
-            return user.name.toLowerCase().includes(searchfield.toLowerCase());
-        })
-        return !users.length ?
-        <h1 className='tc f1'>Loading</h1> :
-        (
+        const { users, searchfield, emailSearch } = this.state;
+        if (emailSearch === true) {
+            var filteredResults = users.filter(user => {
+                    return user.email.toLowerCase().includes(searchfield.toLowerCase());
+                })
+        }
+        else {
+            var filteredResults = this.state.users.filter(user => {
+                return user.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+            })
+        }
+
+        return (
             <div>
                 <Nav>
                     <Logo>
@@ -110,10 +145,11 @@ class People extends Component {
                 </Nav>
 
                 <BodyWrapper>
-                    <SearchBox searchChange={this.onSearchChange}/>
-                    <Scroll>
-                        <UserCardList users={filteredUsers}/>
-                    </Scroll>
+                    <SearchWrapper>
+                        <SearchBox placeholder={"Search Names"} onChange={(e) => this.onSearchChange(e, false)} />
+                        <SearchBox placeholder={"Search Emails"} onChange={(e) => this.onSearchChange(e, true)} />
+                    </SearchWrapper>
+                    <UserCardList users={filteredResults}/>
                 </BodyWrapper>
 
                 <Footer>

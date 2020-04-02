@@ -167,8 +167,8 @@ class Signin extends Component {
             return response;
         })
         .then(response =>
-            response.json().
-            then(json => ({
+            response.json()
+            .then(json => ({
                 status: response.status,
                 json
             })

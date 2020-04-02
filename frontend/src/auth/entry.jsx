@@ -19,17 +19,6 @@ const Logo = styled.div`
     color: #2F80ED;
 `;
 
-const WelcomeMsg = styled.div`
-    margin-top: 7.5vh;
-
-    font-family: Lato;
-    font-weight: 700;
-    font-size: 50px;
-    width: 100%;
-
-    color: #4F4F4F;
-`;
-
 class Welcome extends Component {
     constructor(props) {
         super(props);
