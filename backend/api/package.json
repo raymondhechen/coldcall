@@ -2,11 +2,12 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "create-dev-tables": "babel-node ./app/db/dbCreate createAllTables",
-    "start": "nodemon --watch . --exec babel-node -- server",
-    "setup": "npm-run-all -p start create-dev-tables"
+    "create-tables": "babel-node ./app/db/dbCreate createAllTables",
+    "create-tables2": "babel-node ./app/db/dbCreate createAllTables",
+    "start": "babel-node -- server",
+    "build": "npm-run-all -s create-tables create-tables2 start"
   },
   "author": "",
   "license": "ISC",

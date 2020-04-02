@@ -161,8 +161,7 @@ function createAllTables() {
     .catch((err) => {
         console.log(err);
         pool.end();
-    })
-    ;
+    });
 };
 
 export { createAllTables };

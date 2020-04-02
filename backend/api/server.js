@@ -1,5 +1,4 @@
 import express from 'express';
-import 'babel-polyfill';
 import cors from 'cors';
 import env from './env';
 
