@@ -1,22 +1,12 @@
-uid,skill_name
-1,Programming
-1,Design
-3,Programming
-4,Programming
-5,Design
-5,Statistics
-7,Math
-9,Math
-9,Medicine
-10,Research
-11,Medicine
-12,Programming
-13,Finance
-14,Finance
-15,Research
-16,Business
-17,Business
-17,Statistics
-17,Medicine
-20,Research
-21,Programming
+sid	topic	skill_name
+1	STEM	Programming
+2	Humanities	Design
+3	STEM	Statistics
+4	STEM	Math
+5	STEM	Medicine
+6	STEM	Research
+7	Humanities	Finance
+8	Humanities	Business
+9	Sports	Basketball
+10	Sports	Football
+11	Sports	Tennis

@@ -1,13 +1,9 @@
-student_uid,teacher_uid,start_time,end_time,place,location_name
-1,2,02:00:00,05:00:00,Perkins,Link
-2,3,04:00:00,05:00:00,Perkins,First Floor
-3,5,05:00:00,07:00:00,Bostock,Edge
-4,1,01:00:00,03:00:00,West Union,ABP
-5,2,04:00:00,05:00:00,LSRC,C Wing
-6,5,02:00:00,03:00:00,West Union,Cafe
-7,6,03:00:00,05:00:00,West Union,Cafe
-7,4,03:00:00,05:00:00,Bostock,Second Floor
-8,3,03:00:00,08:00:00,LSRC,A Wing
-8,2,03:00:00,05:00:00,LSRC,B Wing
-9,8,04:00:00,06:00:00,LSRC,A Wing
-10,9,05:00:00,08:00:00,Bostock,Edge
+rid,student_id,teacher_id,start_time,end_time,sid,lid,finished,time_created
+1,1,7,0:00:00,1:00:00,4,1,TRUE,2:00:00
+2,2,9,2:00:00,4:00:00,5,2,FALSE,1:00:00
+3,3,7,1:00:00,3:00:00,4,3,FALSE,1:00:00
+4,4,1,5:00:00,6:00:00,2,4,TRUE,2:00:00
+5,5,10,4:00:00,5:00:00,6,5,FALSE,3:00:00
+6,6,11,4:00:00,8:00:00,5,6,TRUE,5:00:00
+7,7,12,7:00:00,8:00:00,1,7,TRUE,5:00:00
+8,8,3,3:00:00,5:00:00,1,8,FALSE,4:00:00
