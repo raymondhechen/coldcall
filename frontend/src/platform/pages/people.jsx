@@ -51,33 +51,33 @@ class People extends Component {
         }));
     }
 
-    onSearchChange = (event, emailBool) => {
+    onSearchChange = (event, searchValue) => {
         this.setState({ searchfield: event.target.value });
-        if (emailBool === true) {
+        if (searchValue === 0) {
             this.setState({
-                emailSearch: true
+                searchType: 0
             })
         }
         else {
             this.setState({
-                emailSearch: false
+                searchType: 1
             })
         }
     }
 
     render() {
-        const { users, searchfield, emailSearch } = this.state;
-        if (emailSearch === 0) {
+        const { users, searchfield, searchType } = this.state;
+        if (searchType === 0) {
             var filteredResults = users.filter(user => {
                     return user.name.toLowerCase().includes(searchfield.toLowerCase());
                 })
         }
-        else if (emailSearch === 1) {
+        else if (searchType === 1) {
             filteredResults = this.state.users.filter(user => {
                 return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
             })
         }
-        else if (emailSearch === 2) {
+        else if (searchType === 2) {
             filteredResults = this.state.users.filter(user => {
                 return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
             })
