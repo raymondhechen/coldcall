@@ -1,4 +1,4 @@
-Since milestone 1, we've introduced several changes to our database system. The ER diagram for this new database system has not truly changed that much, but the new schema differs in a few areas. The new database schema is as follows:
+Since milestone 1, we've introduced very minor changes to our database system. The ER diagram for this new database system has not truly changed much, but the new schema differs in a minor areas. The new database schema is as follows:
 
 - Users(uid, email, first_name, last_name, password, created)
 - Skills(sid,topic,skill_name) 
