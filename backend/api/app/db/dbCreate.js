@@ -9,71 +9,71 @@ pool.on('remove', () => {
     process.exit(0);
 });
 
-const usersCreateQuery =
+const usersCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS Users (
-    uid SERIAL PRIMARY KEY,
-    email VARCHAR(256) UNIQUE NOT NULL,
-    first_name VARCHAR(256),
-    last_name VARCHAR(256),
-    password VARCHAR(256) NOT NULL,
-    created DATE NOT NULL
+    uid SERIAL PRIMARY KEY, 
+    email VARCHAR(256) UNIQUE NOT NULL, 
+    first_name VARCHAR(256), 
+    last_name VARCHAR(256), 
+    password VARCHAR(256) NOT NULL, 
+    created DATE NOT NULL 
     )
 `;
 
-const skillsCreateQuery =
+const skillsCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS Skills (
-    sid SERIAL PRIMARY KEY,
-    topic VARCHAR(256) NOT NULL,
+    sid SERIAL PRIMARY KEY, 
+    topic VARCHAR(256) NOT NULL, 
     skill_name VARCHAR(256) NOT NULL
     )
 `;
 
-const hasCreateQuery =
+const hasCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS HasSkill (
-    uid SERIAL NOT NULL REFERENCES Users(uid),
+    uid SERIAL NOT NULL REFERENCES Users(uid), 
     sid SERIAL NOT NULL REFERENCES Skills(sid),
     PRIMARY KEY (uid, sid)
     )
 `;
 
-const wantCreateQuery =
+const wantCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS WantSkill (
-    uid SERIAL NOT NULL REFERENCES Users(uid),
-    sid SERIAL NOT NULL REFERENCES Skills(sid),
+    uid SERIAL NOT NULL REFERENCES Users(uid), 
+    sid SERIAL NOT NULL REFERENCES Skills(sid), 
     PRIMARY KEY (uid, sid)
     )
 `;
 
-const availableCreateQuery =
+const availableCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS Availabilities (
-    uid SERIAL NOT NULL REFERENCES Users(uid),
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL,
+    uid SERIAL NOT NULL REFERENCES Users(uid), 
+    start_time DATE NOT NULL,
+    end_time DATE NOT NULL, 
     PRIMARY KEY (uid, start_time, end_time)
     )
 `;
 
-const reservationCreateQuery =
+const reservationCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS Reservations (
     rid SERIAL PRIMARY KEY,
     student_id SERIAL NOT NULL REFERENCES Users(uid),
     teacher_id SERIAL NOT NULL REFERENCES Users(uid) CHECK (student_id <> teacher_id),
-    start_time TIME NOT NULL,
-    end_time TIME NOT NULL CHECK (end_time > start_time),
-    sid SERIAL NOT NULL REFERENCES Skills(sid),
-    lid SERIAL NOT NULL REFERENCES Locations(lid),
+    start_time DATE NOT NULL,
+    end_time DATE NOT NULL CHECK (end_time > start_time),
+    sid SERIAL NOT NULL REFERENCES Skills(sid), 
+    lid SERIAL NOT NULL REFERENCES Locations(lid), 
     finished BOOLEAN NOT NULL,
-    time_created TIME NOT NULL
+    time_created DATE NOT NULL
 )
 `;
 
-const locationsCreateQuery =
+const locationsCreateQuery = 
 `
 CREATE TABLE IF NOT EXISTS Locations (
     lid SERIAL PRIMARY KEY,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS Locations (
 `;
 
 
-/*
+/* 
 create all tables in order:
 Users
 Skills
@@ -93,7 +93,7 @@ Availabilities
 Locations
 Reservations
 
-I've tried like 5 different ways to solve this and
+I've tried like 5 different ways to solve this and 
 I can't so just run the setup script twice...
 */
 function createAllTables() {
