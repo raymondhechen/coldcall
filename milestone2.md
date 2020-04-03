@@ -1,5 +1,13 @@
 Since milestone 1, we've introduced several changes to our database system. The ER diagram for this new database system has not truly changed that much, but the new schema differs in a few areas. The new database schema is as follows:
 
+- Users(uid, email, first_name, last_name, password, created)
+- Skills(sid,topic,skill_name) 
+- HasSkill(sid,topic,skill_name) 
+- WantSkill(sid,sid,skill_name) 
+- Availabilities(uid,start_time,end_time) 
+- Reservations(rid,student_uid, teacher_uid, start_time, end_time, sid, lid, finished, time_created) 
+- Locations(lid, loc_name, place)
+
 For our platform, we decided to go full-stack javascript. For the backend, we chose ExpressJS, which we used to create a REST API. The backend will directly make calls to a PostgreSQL database to obtain, write, or manipulate our data. Those queries to the database can be made through our API's endpoints. For the frontend framework, we chose ReactJS. The frontend consumes the backend REST API and serves as the user's client-facing controller for getting and writing data to the database.
 
 We've currently made significant progress on both backend and frontend development. We've essentially constructed the majority of the frontend's landing, authorization, and main platform pages, but more work still needs to be done. Specifically, we'll need to implement frontend authorization systems and dynamic routing too. As for the backend, we've generally completed development of our API and are beginning testing. The API endpoints appear to work properly and the database system appears to be working as planned too. Next steps for the backend involve authorization systems too.
