@@ -11,11 +11,11 @@ ReactJS, Styled-Components
 ## Backend
 ExpressJS, PostgreSQL
 ### Setup Instructions
-- run `npm run create-dev-tables` twice
-- run `npm run setup`
-- run `npm run start`
+- run `npm run build` for all builds
 
-# SQL Instructions
+
+# Database Instructions
+Our backend allows you to directly build an empty database with our schemas in a local postgreSQL server. 
 Before running the instructions to setup the database, navigate to the load.sql file in the coldcall/backend/database folder. Change the paths of the csv files such that it matches the paths of the csv files on your local machine.
 To create the database, run these commands in terminal:
 - dropdb coldcall

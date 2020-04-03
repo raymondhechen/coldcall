@@ -4,3 +4,4 @@ For our platform, we decided to go full-stack javascript. For the backend, we ch
 
 We've currently made significant progress on both backend and frontend development. We've essentially constructed the majority of the frontend's landing, authorization, and main platform pages, but more work still needs to be done. Specifically, we'll need to implement frontend authorization systems and dynamic routing too. As for the backend, we've generally completed development of our API and are beginning testing. The API endpoints appear to work properly and the database system appears to be working as planned too. Next steps for the backend involve authorization systems too.
 
+Instructions about using our system can be found in README.md. Our project is being deployed using Heroku and the frontend can be accessible with the following link: https://coldcall-frontend.herokuapp.com
