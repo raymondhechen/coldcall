@@ -247,7 +247,7 @@ class Landing extends Component {
                     <BodyRight>
                         <DukeImg src={Duke} alt="duke"/>
                         <BodyText3>
-                            We're at Duke!
+
                         </BodyText3>
                     </BodyRight>
                 </Body2>

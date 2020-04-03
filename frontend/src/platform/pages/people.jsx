@@ -39,7 +39,7 @@ class People extends Component {
         this.state = {
             users: [],
             searchfield: '',
-            emailSearch: false
+            searchType: 0
         }
     }
 
@@ -67,14 +67,24 @@ class People extends Component {
 
     render() {
         const { users, searchfield, emailSearch } = this.state;
-        if (emailSearch === true) {
+        if (emailSearch === 0) {
             var filteredResults = users.filter(user => {
-                    return user.email.toLowerCase().includes(searchfield.toLowerCase());
+                    return user.name.toLowerCase().includes(searchfield.toLowerCase());
                 })
+        }
+        else if (emailSearch === 1) {
+            filteredResults = this.state.users.filter(user => {
+                return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
+            })
+        }
+        else if (emailSearch === 2) {
+            filteredResults = this.state.users.filter(user => {
+                return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
+            })
         }
         else {
             filteredResults = this.state.users.filter(user => {
-                return user.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+                return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
             })
         }
 
@@ -84,8 +94,8 @@ class People extends Component {
 
                 <BodyWrapper>
                     <SearchWrapper>
-                        <SearchBox placeholder={"Search Names"} onChange={(e) => this.onSearchChange(e, false)} />
-                        <SearchBox placeholder={"Search Emails"} onChange={(e) => this.onSearchChange(e, true)} />
+                        <SearchBox placeholder={"Search Names"} onChange={(e) => this.onSearchChange(e, 0)} />
+                        <SearchBox placeholder={"Search Emails"} onChange={(e) => this.onSearchChange(e, 1)} />
                     </SearchWrapper>
                     <UserCardList users={filteredResults}/>
                 </BodyWrapper>

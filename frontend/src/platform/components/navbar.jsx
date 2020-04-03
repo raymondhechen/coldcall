@@ -14,7 +14,7 @@ const Nav = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: white;
+    background-color: #e8e8e8;
 `;
 
 const Logo = styled.div`

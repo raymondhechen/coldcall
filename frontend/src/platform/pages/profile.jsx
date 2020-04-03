@@ -12,6 +12,39 @@ const BodyWrapper = styled.div`
     min-height: 67.5vh;
 `;
 
+const LeftWrapper = styled.div`
+    width: 50%;
+    margin-left: 15vw;
+`;
+
+const AvatarIcon = styled.div`
+
+`;
+
+const Box = styled.div`
+    background-color: gray;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+`;
+
+const Title = styled.div`
+    font-family: proxima-nova;
+    font-weight: 700;
+    font-size: 30px;
+`;
+
+const SubTitle = styled.div`
+    font-family: proxima-nova;
+    font-weight: 500;
+    font-size: 20px;
+    padding-bottom: 10px;
+`;
+
+const RightWrapper = styled.div`
+    width: 50%
+`;
+
 class Profile extends Component {
     componentWillMount() {
 
@@ -23,7 +56,32 @@ class Profile extends Component {
                 <NavBar/>
 
                 <BodyWrapper>
-                    
+                    <LeftWrapper>
+                        <AvatarIcon>
+                            <Box/>
+                        </AvatarIcon>
+                    </LeftWrapper>
+                    <RightWrapper>
+                        <Title>
+                            Name
+                        </Title>
+                        <SubTitle>
+                            Raymond Chen
+                        </SubTitle>
+                        <Title>
+                            Email
+                        </Title>
+                        <SubTitle>
+                            rc284@duke.edu
+                        </SubTitle>
+                        <Title>
+                            Interests
+                        </Title>
+                        <SubTitle>
+                            Computer Science, Data Science
+                        </SubTitle>
+
+                    </RightWrapper>
                 </BodyWrapper>
 
                 <Footer/>

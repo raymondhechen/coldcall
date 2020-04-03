@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
-import SmallCardList from '../components/SmallCardList';
+import SmallCardList from '../components/SmallUserCardList';
 
 const BodyWrapper = styled.div`
     display: flex;
@@ -46,7 +46,8 @@ class Home extends Component {
     constructor() {
         super()
         this.state = {
-            fiveUsers: []
+            fiveUsers: [],
+            fiveRes: []
         }
     }
 
