@@ -23,7 +23,6 @@ const Logo = styled.div`
     font-family: Lato;
     font-weight: 900;
     font-size: calc(1.5em + 1vw);
-    line-height: 60px;
     display: flex;
     align-items: center;
     text-align: center;
