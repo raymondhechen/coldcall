@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
 
+import UserAvatar from '../assets/user.svg';
+
 const BodyWrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -14,11 +16,8 @@ const BodyWrapper = styled.div`
 
 const LeftWrapper = styled.div`
     width: 50%;
-    margin-left: 15vw;
-`;
-
-const AvatarIcon = styled.div`
-
+    display: flex;
+    justify-content: center;
 `;
 
 const Box = styled.div`
@@ -26,6 +25,15 @@ const Box = styled.div`
     width: 250px;
     height: 250px;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+`;
+
+const Avatar = styled.img` 
+    width: auto;
+    height: 15vh;
+    min-width: 225px;
+    margin: 7.5vh 0 0 0;
 `;
 
 const Title = styled.div`
@@ -57,9 +65,9 @@ class Profile extends Component {
 
                 <BodyWrapper>
                     <LeftWrapper>
-                        <AvatarIcon>
-                            <Box/>
-                        </AvatarIcon>
+                        <Box>
+                            <Avatar src={ UserAvatar } alt="user" />
+                        </Box>
                     </LeftWrapper>
                     <RightWrapper>
                         <Title>

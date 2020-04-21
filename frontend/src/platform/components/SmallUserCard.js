@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import UserAvatar from '../assets/user.svg';
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -22,8 +24,8 @@ const Container = styled.div`
 
 const Avatar = styled.img` 
     width: auto;
-    height: 12.5vh;
-    margin: 0 0 2.5vh 0;
+    height: 7.5vh;
+    margin: 3vh 0 2.5vh 0;
 `;
 
 const Name = styled.div`
@@ -35,7 +37,7 @@ const Name = styled.div`
 const SmallCard = ({ name, email, id }) => {
     return (
         <Container>
-            <Avatar src={`https://robohash.org/${id}?50x50`} alt="user" />
+            <Avatar src={ UserAvatar } alt="user" />
             <Name>{name}</Name>
         </Container>
     );
