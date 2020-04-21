@@ -1,6 +1,9 @@
 # Cold Call
 Connecting, Learning, and Empowering
 
+## Note
+This system version was built and designed to meet specifications for Duke University's COMPSCI 316 course on databases. 
+
 # Technical Details
 ## Frontend
 ReactJS, Styled-Components
@@ -12,9 +15,7 @@ ReactJS, Styled-Components
 ExpressJS, PostgreSQL
 ### Setup Instructions
 - run `npm run build` for all builds
-
-
-# Database Instructions
+### Database Instructions
 Our backend allows you to directly build an empty database with our schemas in a local postgreSQL server. 
 Database construction and initialization queries are found within backend/api/app/db/dbCreate.js. 
 PostgreSQL must be installed locally and run in order for the backend to work locally. 
@@ -22,9 +23,7 @@ Furthermore, the environment variables must be corrected in a .env file to accur
 From there, you can use Postman to test the API endpoints. 
 The API endpoints are found in the routes folder in the backend, and the actuall functions they call are found in the controllers folder in the backend.
 
-
-
-# Tutorials
+# Sources Used
 ### Javascript
 - https://codeburst.io/javascript-what-the-heck-is-a-callback-aba4da2deced
 - https://stackoverflow.com/questions/5000415/call-a-function-after-previous-function-is-complete
@@ -42,4 +41,3 @@ The API endpoints are found in the routes folder in the backend, and the actuall
 - https://www.freecodecamp.org/news/how-to-understand-a-components-lifecycle-methods-in-reactjs-e1a609840630/
 - https://stackoverflow.com/questions/34875557/creating-custom-function-in-react-component
 - https://stackoverflow.com/questions/34226076/why-is-my-onclick-being-called-on-render-react-js
-
