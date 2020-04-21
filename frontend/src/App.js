@@ -1,14 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Landing from './landing/landing';
-import Register from './auth/register';
-import Signin from './auth/signin';
-import Welcome from './auth/entry';
-import Home from './platform/pages/home';
-import People from './platform/pages/people';
-import Reservations from './platform/pages/reservations';
-import Profile from './platform/pages/profile';
+
+import Routes from './Routes';
 
 import './transitions.css'
 
@@ -25,16 +19,7 @@ function App() {
                     timeout={{enter: 300, exit: 100}}
                     >
 
-                        <Switch location={location}>
-                            <Route exact path="/" component={Landing}/>
-                            <Route exact path="/signup" component={Register}/>
-                            <Route exact path="/signin" component={Signin}/>
-                            <Route exact path="/welcome" component={Welcome}/>
-                            <Route exact path="/home" component={Home}/>
-                            <Route exact path="/people" component={People}/>
-                            <Route exact path="/reservations" component={Reservations}/>    
-                            <Route exact path="/profile" component={Profile}/>                            
-                        </Switch>
+                        <Routes props={location}/>
 
                     </CSSTransition>
             </TransitionGroup>

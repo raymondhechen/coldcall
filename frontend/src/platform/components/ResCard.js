@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import UserAvatar from '../assets/user.svg';
-
 const Container = styled.div`
     display: flex;
     flex-direction: column;
@@ -10,7 +8,7 @@ const Container = styled.div`
     border-radius: 10px;
     min-width: 225px;
     width: 17.5vw;
-    height: 35vh;
+    height: 25vh;
     margin: 2.5vh 2vw 2.5vh 2vw;
     transition: background-color 0.2s ease-in-out;
     text-align: center;
@@ -20,13 +18,6 @@ const Container = styled.div`
     :hover {
         background-color: #27bff2;
     }
-`;
-
-const Avatar = styled.img` 
-    width: auto;
-    height: 15vh;
-    min-width: 225px;
-    margin: 5vh 0 2.5vh 0;
 `;
 
 const Name = styled.div`
@@ -41,14 +32,27 @@ const Email = styled.div`
     font-size: 15px;
 `;
 
-const UserCard = ({ firstName, lastName, email }) => {
+const Date = styled.div`
+    font-family: Lato;
+    font-weight: 500;
+    font-size: 15px;
+`;
+
+const Time = styled.div`
+    font-family: Lato;
+    font-weight: 500;
+    font-size: 15px;
+`;
+
+const ResCard = ({ name, email, date, time }) => {
     return (
         <Container>
-            <Avatar src={UserAvatar} alt="user" />
-            <Name>{firstName} {lastName}</Name>
+            <Name>{name}</Name>
             <Email>{email}</Email>
+            <Date>{date}</Date>
+            <Time>{time}</Time>
         </Container>
     );
 }
 
-export default UserCard;
+export default ResCard;

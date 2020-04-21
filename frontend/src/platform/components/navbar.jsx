@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import styled from 'styled-components';
 import ProfileIcon from '../../landing/assets/profile.svg';
 
@@ -63,17 +63,51 @@ const Li = styled.li`
     font-family: Lato;
     font-weight: 800;
     font-size: calc(1em + 1vw);
-    transition: color 0.2s;
+    cursor: pointer;
+    transition: color 0.15s ease-in-out;
+    color: #2F80ED;
+
+    :hover {
+        color: #024fb8;
+    }
 `;
 
 
 class NavBar extends Component {
     goHome() {
-        this.props.history.push('/home');
+        this.props.history.push({
+            pathname: '/home',
+            state: {
+                token: this.props.location.state.token
+            }
+        });
+    }
+
+    goPeople() {
+        this.props.history.push({
+            pathname: '/people',
+            state: {
+                token: this.props.location.state.token
+            }
+        });
+    }
+
+    goReservations() {
+        this.props.history.push({
+            pathname: '/reservations',
+            state: {
+                token: this.props.location.state.token
+            }
+        });
     }
 
     goProfile() {
-        this.props.history.push('/profile');
+        this.props.history.push({
+            pathname: '/profile',
+            state: {
+                token: this.props.location.state.token
+            }
+        });
     }
 
     render() {
@@ -83,12 +117,8 @@ class NavBar extends Component {
                     COLD CALL
                 </Logo>
                 <Ul>
-                    <Link to="/reservations">
-                        <Li>RESERVATIONS</Li>
-                    </Link>
-                    <Link to="/people">
-                        <Li>PEOPLE</Li>
-                    </Link>
+                    <Li onClick={e => this.goReservations(e)}>RESERVATIONS</Li>
+                    <Li onClick={e => this.goPeople(e)}>PEOPLE</Li>
                 </Ul>
                 <ProfileButton src={ProfileIcon} onClick={e => this.goProfile(e)}/>
             </Nav>

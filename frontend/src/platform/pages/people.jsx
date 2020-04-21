@@ -44,11 +44,22 @@ class People extends Component {
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(users => this.setState({ 
-            users: users
-        }));
+        fetch('http://localhost:5000/api/users')
+        .then((response) => {
+            return response;
+        })
+        .then(response => 
+            response.json()
+            .then(json => ({
+                status: response.status,
+                json
+            }))
+        )
+        .then(({ json }) => {
+            this.setState({json});
+            const { json: {data: usersList}} = this.state;
+            this.setState({users: usersList});
+        });
     }
 
     onSearchChange = (event, searchValue) => {
@@ -69,7 +80,7 @@ class People extends Component {
         const { users, searchfield, searchType } = this.state;
         if (searchType === 0) {
             var filteredResults = users.filter(user => {
-                    return user.name.toLowerCase().includes(searchfield.toLowerCase());
+                    return user.first_name.toLowerCase().includes(searchfield.toLowerCase());
                 })
         }
         else if (searchType === 1) {
@@ -97,7 +108,7 @@ class People extends Component {
                         <SearchBox placeholder={"Search Names"} onChange={(e) => this.onSearchChange(e, 0)} />
                         <SearchBox placeholder={"Search Emails"} onChange={(e) => this.onSearchChange(e, 1)} />
                     </SearchWrapper>
-                    <UserCardList users={filteredResults}/>
+                    <UserCardList users={this.state.users}/>
                 </BodyWrapper>
 
                 <Footer/>

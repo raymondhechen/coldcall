@@ -54,11 +54,51 @@ const RightWrapper = styled.div`
 `;
 
 class Profile extends Component {
-    componentWillMount() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            firstName: "",
+            lastName: "", 
+            skills: [],
+            token: ""
+        };
+    }
 
+    componentDidMount() {
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json',
+                        'token': this.props.location.state.token
+                    },
+            body: JSON.stringify({ email: this.state.email, password: this.state.password })
+        };
+        fetch('http://localhost:5000/api/auth/user', reqOptions)
+        .then((response) => {
+            return response;
+        })
+        .then(response => 
+            response.json()
+            .then(json => ({
+                status: response.status,
+                json
+            }))
+        )
+        .then(({ json }) => {
+            this.setState({json});
+            const { json: {data: [emailAdd, first, last, skillSet]}} = this.state;
+            this.setState({firstName: first});
+            this.setState({lastName: last});
+            this.setState({email: emailAdd});
+            this.setState({skills: skillSet})
+        });
     }
 
     render() {
+        var skillList = this.state.skills.map(function(name) {
+            return <div>{name}</div>;
+        })
+
         return (
             <div>
                 <NavBar/>
@@ -74,19 +114,19 @@ class Profile extends Component {
                             Name
                         </Title>
                         <SubTitle>
-                            Raymond Chen
+                            {this.state.firstName} {this.state.lastName}
                         </SubTitle>
                         <Title>
                             Email
                         </Title>
                         <SubTitle>
-                            rc284@duke.edu
+                            {this.state.email}
                         </SubTitle>
                         <Title>
-                            Interests
+                            Skills
                         </Title>
                         <SubTitle>
-                            Computer Science, Data Science
+                            {skillList}
                         </SubTitle>
 
                     </RightWrapper>

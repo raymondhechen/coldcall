@@ -51,12 +51,15 @@ class Home extends Component {
         }
     }
 
+    // Props --> token
+
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(response => response.json())
         .then(users => this.setState({ 
             fiveUsers: [users[0], users[1], users[2], users[3], users[4]]
         }));
+        console.log(this.props.location.state.token);
     }
 
     render() {

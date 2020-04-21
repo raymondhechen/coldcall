@@ -30,7 +30,12 @@ class Welcome extends Component {
 
     componentDidMount() {
         window.setTimeout(() => {
-            this.props.history.push('/home');
+            this.props.history.push({
+                pathname: '/home',
+                state: {
+                    token: this.props.location.state.token
+                }
+            });
          }, 3000)
     }
 

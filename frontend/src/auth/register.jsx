@@ -140,7 +140,8 @@ class Register extends Component {
             password: "",
             validEmail: true,
             validPassword: true,
-            registered: false
+            registered: false,
+            token: ""
         };
     }
 
@@ -236,9 +237,16 @@ class Register extends Component {
             })
         ))
         .then(({ status, json }) => {
-            console.log({ status, json });
+            this.setState({json});
+            const { json: {data: {token: tokenID}}} = this.state;
+            this.setState({token: tokenID});
             if (status === 201) {
-                this.props.history.push('/welcome');
+                this.props.history.push({
+                    pathname: '/welcome',
+                    state: {
+                        token: tokenID
+                    }
+                });
             }
         })
         .catch((error) => {

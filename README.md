@@ -8,13 +8,12 @@ This system version was built and designed to meet specifications for Duke Unive
 ## Frontend
 ReactJS, Styled-Components
 ### Setup Instructions
-- run `npm run start` for development build
-- run `npm run build` for deployment build
+- run `npm run start` for dev build
 
 ## Backend
 ExpressJS, PostgreSQL
 ### Setup Instructions
-- run `npm run build` for all builds
+- run `npm run build` for dev build
 ### Database Instructions
 Our backend allows you to directly build an empty database with our schemas in a local postgreSQL server. 
 Database construction and initialization queries are found within backend/api/app/db/dbCreate.js. 

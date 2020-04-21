@@ -136,7 +136,8 @@ class Signin extends Component {
         this.state = {
             email: "",
             password: "",
-            validAccount: true
+            validAccount: true,
+            token: ""
         };
     }
 
@@ -171,12 +172,19 @@ class Signin extends Component {
             .then(json => ({
                 status: response.status,
                 json
-            })
-        ))
+            }))
+        )
         .then(({ status, json }) => {
-            console.log({ status, json });
+            this.setState({json});
+            const { json: {data: {token: tokenID}}} = this.state;
+            this.setState({token: tokenID});
             if (status === 200) {
-                this.props.history.push('/welcome');
+                this.props.history.push({
+                    pathname: '/welcome',
+                    state: {
+                        token: tokenID
+                    }
+                });
             }
             else {
                 this.setState({

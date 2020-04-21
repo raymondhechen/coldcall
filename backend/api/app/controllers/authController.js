@@ -1,7 +1,51 @@
 import moment from 'moment';
 import dbQuery from '../db/dbQuery';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { hashPassword, comparePassword, isValidEmail, validatePassword, isEmpty, generateUserToken } from '../middlewares/validations';
 import { errorMessage, successMessage, status } from '../middlewares/status';
+
+dotenv.config();
+
+/**
+ * Get current user info
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} user info
+ */
+const getUser = async (req, res) => {
+    const { token } = req.headers;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET);
+        
+        const getSkillsQuery = 
+        `
+        SELECT skill_name FROM Users JOIN 
+        (SELECT * FROM Skills JOIN HasSkill 
+        ON Skills.sid = HasSkill.sid) AS C 
+        ON Users.uid = C.uid 
+        WHERE email = $1
+        `;
+        const { rows } = await dbQuery.query(getSkillsQuery, [decoded.email]);
+        const skills = [];
+        var i;
+        for (i = 0; i < rows.length; i++) {
+            skills.push(rows[i].skill_name);
+        }
+        console.log(skills)
+        const values = [decoded.email, decoded.first_name, decoded.last_name, skills]; // store in list
+        successMessage.data = values;
+        return res.status(status.success).send(successMessage);
+    } catch (error) {
+        console.log(error);
+        errorMessage.error = 'Authentication Failed';
+        return res.status(status.unauthorized).send(errorMessage);
+    }
+};
 
 /**
  * Signup: create a user
@@ -102,4 +146,4 @@ const siginUser = async (req, res) => {
     }
 };
 
-export { createUser, siginUser };
+export { getUser, createUser, siginUser };

@@ -2,6 +2,30 @@ import dbQuery from '../db/dbQuery';
 import { errorMessage, successMessage, status } from '../middlewares/status';
 
 /**
+ * Get all users
+ * @params {Object} req
+ * @params {Object} res
+ * @returns users
+ */ 
+const getUsers = async (req, res) => {
+    const searchQuery = 'SELECT * from users ORDER BY last_name DESC';
+    try {
+        const { rows } = await dbQuery.query(searchQuery);
+        const dbResponse = rows;
+        if (!dbResponse[0]) {
+            errorMessage.error = 'No users';
+            return res.status(status.notfound).send(errorMessage);
+        }
+        successMessage.data = dbResponse;
+        return res.status(status.success).send(successMessage);
+    }
+    catch (error) {
+        errorMessage.error = 'Operation was not successful';
+        return res.status(status.error).send(errorMessage);
+    }
+};
+
+/**
  * Search by email address
  * @params {Object} req
  * @params {Object} res
@@ -103,4 +127,4 @@ const searchSkill = async (req, res) => {
     }
 };
 
-export { searchEmail, searchFirstnameOrLastname, searchTopic, searchSkill };
+export { getUsers, searchEmail, searchFirstnameOrLastname, searchTopic, searchSkill };

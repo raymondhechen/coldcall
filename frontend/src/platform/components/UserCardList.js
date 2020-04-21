@@ -17,8 +17,9 @@ const UserCardList = ({ users }) => {
         return (
             <UserCard 
                 key={i} 
-                id={users[i].id} 
-                name={users[i].name} 
+                uid={users[i].uid} 
+                firstName={users[i].first_name} 
+                lastName={users[i].last_name}
                 email={users[i].email}
             />
         );
