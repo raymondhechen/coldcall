@@ -16,7 +16,7 @@ const SearchWrapper = styled.div`
     padding-top: 15vh;
     display: flex; 
     flex-direction: row; 
-    justify-content: space-evenly;
+    justify-content: center;
 `;
 
 const SearchBox = styled.input`
@@ -33,13 +33,30 @@ const SearchBox = styled.input`
     background: #E0E0E0;
 `;
 
+const Button = styled.input`
+    margin-top: 1.1vh;
+    width: 15%;
+    max-width: 100px;
+    height: 48px;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    background: #19A4F2;
+    font-family: proxima-nova;
+    font-weight: 700;
+    transition: background-color 0.2s ease;
+
+    :active {
+        background: #0086D1;
+    }
+`;
+
 class People extends Component {
     constructor() {
         super()
         this.state = {
             users: [],
-            searchfield: '',
-            searchType: 0
+            field: ''
         }
     }
 
@@ -62,51 +79,45 @@ class People extends Component {
         });
     }
 
-    onSearchChange = (event, searchValue) => {
-        this.setState({ searchfield: event.target.value });
-        if (searchValue === 0) {
-            this.setState({
-                searchType: 0
-            })
-        }
-        else {
-            this.setState({
-                searchType: 1
-            })
-        }
+    handleSubmit() {
+        const reqOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`http://localhost:5000/api/users/skill?skill=${this.state.field}`, reqOptions)
+        .then((response) => {
+            return response;
+        })
+        .then(response =>
+            response.json()
+            .then(json => ({
+                status: response.status,
+                json
+            }))
+        )
+        .then(({ json }) => {
+            this.setState({json});
+            const { json: {data: userList}} = this.state;
+            this.setState({users: userList});
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+    }
+
+    onSearchChange = (event) => {
+        this.setState({ field: event.target.value });
     }
 
     render() {
-        const { users, searchfield, searchType } = this.state;
-        if (searchType === 0) {
-            var filteredResults = users.filter(user => {
-                    return user.first_name.toLowerCase().includes(searchfield.toLowerCase());
-                })
-        }
-        else if (searchType === 1) {
-            filteredResults = this.state.users.filter(user => {
-                return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
-            })
-        }
-        else if (searchType === 2) {
-            filteredResults = this.state.users.filter(user => {
-                return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
-            })
-        }
-        else {
-            filteredResults = this.state.users.filter(user => {
-                return user.email.toLowerCase().includes(this.state.searchfield.toLowerCase());
-            })
-        }
-
         return (
             <div>
                 <NavBar/>
 
                 <BodyWrapper>
                     <SearchWrapper>
-                        <SearchBox placeholder={"Search Names"} onChange={(e) => this.onSearchChange(e, 0)} />
-                        <SearchBox placeholder={"Search Emails"} onChange={(e) => this.onSearchChange(e, 1)} />
+                        <SearchBox placeholder={"Search Skills"} onChange={(e) => this.onSearchChange(e)} />
+                        <Button type="button" value="ENTER" onClick={e => this.handleSubmit(e)} />
                     </SearchWrapper>
                     <UserCardList users={this.state.users}/>
                 </BodyWrapper>

@@ -13,49 +13,49 @@ pool.on('remove', () => {
 const usersLoadQuery =
 `
   COPY users
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/Users.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Users.csv'
   DELIMITER ',' CSV HEADER
 `;
 
 const skillsLoadQuery =
 `
   COPY skills
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/Skills.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Skills.csv'
   DELIMITER ',' CSV HEADER
 `;
 
 const hasLoadQuery =
 `
   COPY hasskill
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/HasSkill.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/HasSkill.csv'
   DELIMITER ',' CSV HEADER
 `;
 
 const wantLoadQuery =
 `
   COPY wantskill
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/WantSkill.csv'
+  FROM './Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/WantSkill.csv'
   DELIMITER ',' CSV HEADER
 `;
 
 const availableLoadQuery =
 `
   COPY availabilities
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/Availabilities.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Availabilities.csv'
   DELIMITER ',' CSV HEADER
 `;
 
 const reservationLoadQuery =
 `
   COPY reservations
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/Reservations.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Reservations.csv'
   DELIMITER ',' CSV HEADER
 `;
 
 const locationsLoadQuery =
 `
   COPY locations
-  FROM '/Users/Sachin/Documents/DukeUniversity/Spring2020/CS316/coldcall/backend/data/Locations.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Locations.csv'
   DELIMITER ',' CSV HEADER
 `;
 

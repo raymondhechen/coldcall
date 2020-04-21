@@ -114,10 +114,6 @@ const searchSkill = async (req, res) => {
     try {
         const { rows } = await dbQuery.query(searchQuery, [skill]);
         const dbResponse = rows;
-        if (!dbResponse[0]) {
-            errorMessage.error = 'No user with such skill';
-            return res.status(status.notfound).send(errorMessage);
-        }
         successMessage.data = dbResponse;
         return res.status(status.success).send(successMessage);
     }

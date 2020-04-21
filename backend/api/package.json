@@ -4,10 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "load-data": "babel-node ./app/db/dbLoad loadAllTables",
+    "load-data2": "babel-node ./app/db/dbLoad loadAllTables",
     "create-tables": "babel-node ./app/db/dbCreate createAllTables",
     "create-tables2": "babel-node ./app/db/dbCreate createAllTables",
     "start": "babel-node -- server",
-    "build": "npm-run-all -s create-tables create-tables2 start"
+    "build": "npm-run-all -s create-tables create-tables2 load-data load-data2 start"
   },
   "author": "",
   "license": "ISC",
