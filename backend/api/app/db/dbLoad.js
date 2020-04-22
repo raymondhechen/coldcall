@@ -14,14 +14,18 @@ const usersLoadQuery =
 `
   COPY users
   FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Users.csv'
-  DELIMITER ',' CSV HEADER
+  DELIMITER ',' CSV HEADER;
+  SELECT setval(pg_get_serial_sequence('Users', 'uid'), max(uid)) 
+  FROM Users
 `;
 
 const skillsLoadQuery =
 `
   COPY skills
   FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Skills.csv'
-  DELIMITER ',' CSV HEADER
+  DELIMITER ',' CSV HEADER;
+  SELECT setval(pg_get_serial_sequence('Skills', 'sid'), max(sid)) 
+  FROM Skills
 `;
 
 const hasLoadQuery =
@@ -34,7 +38,7 @@ const hasLoadQuery =
 const wantLoadQuery =
 `
   COPY wantskill
-  FROM './Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/WantSkill.csv'
+  FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/WantSkill.csv'
   DELIMITER ',' CSV HEADER
 `;
 
@@ -49,14 +53,18 @@ const reservationLoadQuery =
 `
   COPY reservations
   FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Reservations.csv'
-  DELIMITER ',' CSV HEADER
+  DELIMITER ',' CSV HEADER;
+  SELECT setval(pg_get_serial_sequence('Reservations', 'rid'), max(rid)) 
+  FROM Reservations
 `;
 
 const locationsLoadQuery =
 `
   COPY locations
   FROM '/Users/raymondchen/Documents/Projects/Apps/Web/coldcall/backend/api/app/db/data/Locations.csv'
-  DELIMITER ',' CSV HEADER
+  DELIMITER ',' CSV HEADER;
+  SELECT setval(pg_get_serial_sequence('Locations', 'lid'), max(lid)) 
+  FROM Locations
 `;
 
 

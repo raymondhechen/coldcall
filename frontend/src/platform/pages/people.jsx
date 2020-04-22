@@ -51,6 +51,20 @@ const Button = styled.input`
     }
 `;
 
+const TopicSelect = styled.select` 
+    width: 15%;
+    height: 6.5vh;
+    max-width: 150px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 0;
+    outline: none;
+    border-radius: 5px;
+    font-family: proxima-nova;
+    font-weight: 700;
+    background: #E0E0E0;
+`
+
 class People extends Component {
     constructor() {
         super()
@@ -61,7 +75,7 @@ class People extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/api/users')
+        fetch('http://localhost:3000/api/users')
         .then((response) => {
             return response;
         })
@@ -84,7 +98,7 @@ class People extends Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
-        fetch(`http://localhost:5000/api/users/skill?skill=${this.state.field}`, reqOptions)
+        fetch(`http://localhost:3000/api/users/skill?skill=${this.state.field}`, reqOptions)
         .then((response) => {
             return response;
         })
@@ -116,6 +130,11 @@ class People extends Component {
 
                 <BodyWrapper>
                     <SearchWrapper>
+                        <TopicSelect id="Topics">
+                            <option value="STEM">STEM</option>
+                            <option value="Humanities">Humanities</option>
+                            <option value="Sports">Athletics</option>
+                        </TopicSelect>
                         <SearchBox placeholder={"Search Skills"} onChange={(e) => this.onSearchChange(e)} />
                         <Button type="button" value="ENTER" onClick={e => this.handleSubmit(e)} />
                     </SearchWrapper>

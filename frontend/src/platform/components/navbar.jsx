@@ -18,7 +18,7 @@ const Nav = styled.div`
 `;
 
 const Logo = styled.div`
-    padding: 0 0 0 5vw;
+    padding: 1vh 0 0 5vw;
 
     font-family: Lato;
     font-weight: 900;
@@ -27,13 +27,7 @@ const Logo = styled.div`
     align-items: center;
     text-align: center;
     width: 35%;
-    cursor: pointer;
-    transition: color 0.15s ease-in-out;
     color: #2F80ED;
-
-    :hover {
-        color: #024fb8;
-    }
 `;
 
 const ProfileButton = styled.img`
@@ -74,14 +68,14 @@ const Li = styled.li`
 
 
 class NavBar extends Component {
-    goHome() {
-        this.props.history.push({
-            pathname: '/home',
-            state: {
-                token: this.props.location.state.token
-            }
-        });
-    }
+    // goHome() {
+    //     this.props.history.push({
+    //         pathname: '/home',
+    //         state: {
+    //             token: this.props.location.state.token
+    //         }
+    //     });
+    // }
 
     goPeople() {
         this.props.history.push({
@@ -113,7 +107,7 @@ class NavBar extends Component {
     render() {
         return (
             <Nav>
-                <Logo onClick={e => this.goHome(e)}>
+                <Logo>
                     COLD CALL
                 </Logo>
                 <Ul>

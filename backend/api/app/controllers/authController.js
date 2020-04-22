@@ -37,8 +37,51 @@ const getUser = async (req, res) => {
             skills.push(rows[i].skill_name);
         }
         console.log(skills)
-        const values = [decoded.email, decoded.first_name, decoded.last_name, skills]; // store in list
+        const values = [decoded.uid, decoded.email, decoded.first_name, decoded.last_name, skills]; // store in list
         successMessage.data = values;
+        return res.status(status.success).send(successMessage);
+    } catch (error) {
+        console.log(error);
+        errorMessage.error = 'Authentication Failed';
+        return res.status(status.unauthorized).send(errorMessage);
+    }
+};
+
+/**
+ * Add skill to user
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} user info
+ */
+const addSkill = async (req, res) => {
+    const { token } = req.headers;
+    const { topic, skill } = req.body;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET);
+        
+        const insertSkill = 
+        `
+        INSERT INTO 
+        Skills(topic, skill_name)
+        VALUES($1, $2)
+        RETURNING *
+        `
+        const { rows } = await dbQuery.query(insertSkill, [topic, skill]);
+        var skillID = rows[0].sid
+        
+        const insertHasSkill = 
+        `
+        INSERT INTO 
+        HasSkill(uid, sid)
+        VALUES($1, $2)
+        RETURNING *
+        `
+        // Insert new skill into HasSkill table
+        await dbQuery.query(insertHasSkill, [decoded.uid, skillID]);
         return res.status(status.success).send(successMessage);
     } catch (error) {
         console.log(error);
@@ -88,7 +131,7 @@ const createUser = async (req, res) => {
         const dbResponse = rows[0];
         console.log(dbResponse);
         delete dbResponse.password;
-        const token = generateUserToken(dbResponse.email, dbResponse.id, dbResponse.is_admin, dbResponse.first_name, dbResponse.last_name);
+        const token = generateUserToken(dbResponse.uid, dbResponse.email, dbResponse.id, dbResponse.is_admin, dbResponse.first_name, dbResponse.last_name);
         successMessage.data = dbResponse;
         successMessage.data.token = token;
         console.log("success");
@@ -134,7 +177,7 @@ const siginUser = async (req, res) => {
             errorMessage.error = 'The password you provided is incorrect';
             return res.status(status.bad).send(errorMessage);
         }
-        const token = generateUserToken(dbResponse.email, dbResponse.id, dbResponse.is_admin, dbResponse.first_name, dbResponse.last_name);
+        const token = generateUserToken(dbResponse.uid, dbResponse.email, dbResponse.id, dbResponse.is_admin, dbResponse.first_name, dbResponse.last_name);
         delete dbResponse.password;
         successMessage.data = dbResponse;
         successMessage.data.token = token;
@@ -146,4 +189,4 @@ const siginUser = async (req, res) => {
     }
 };
 
-export { getUser, createUser, siginUser };
+export { getUser, addSkill, createUser, siginUser };

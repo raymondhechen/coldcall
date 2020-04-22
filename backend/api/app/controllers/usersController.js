@@ -8,7 +8,7 @@ import { errorMessage, successMessage, status } from '../middlewares/status';
  * @returns users
  */ 
 const getUsers = async (req, res) => {
-    const searchQuery = 'SELECT * from users ORDER BY last_name DESC';
+    const searchQuery = 'SELECT * from users ORDER BY last_name ASC';
     try {
         const { rows } = await dbQuery.query(searchQuery);
         const dbResponse = rows;

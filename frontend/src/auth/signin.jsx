@@ -163,7 +163,7 @@ class Signin extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: this.state.email, password: this.state.password })
         };
-        fetch('http://localhost:5000/api/auth/signin', reqOptions)
+        fetch('http://localhost:3000/api/auth/signin', reqOptions)
         .then((response) => {
             return response;
         })
