@@ -71,8 +71,17 @@ class UserCard extends React.Component {
         return (
             <div>
                 <Modal show={this.state.show} handleClose={this.hideModal}>
-                    <p>Modal</p>
-                    <p>Data</p>
+                    <h1>Schedule your meeting with { firstName } { lastName }!</h1>
+                    <form>
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name"></input><br></br>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date"></input><br></br>
+                        <label for="location">Location:</label>
+                        <input type="text" id="location" name="location"></input><br></br>
+                        <label for="placee">Place:</label>
+                        <input type="text" id="place" name="place"></input><br></br>
+                    </form>
                 </Modal>
                 <Container onClick={this.showModal}>
                     <Avatar src={UserAvatar} alt="user" />
