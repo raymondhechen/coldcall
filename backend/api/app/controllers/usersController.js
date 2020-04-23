@@ -133,7 +133,7 @@ const searchTopicSkill = async (req, res) => {
     const { topic, skill } = req.query;
     const searchQuery = 'SELECT * FROM Users as u JOIN HasSkill as h ON u.uid = h.uid JOIN Skills as s ON h.sid = s.sid WHERE s.topic = $1 AND s.skill_name = $2 ORDER BY last_name DESC';
     try {
-        const { rows } = await dbQuery.query(searchQuery, [topic, skill]);
+        const { rows } = await dbQuery.query(searchQuery, [topic, skill.toLowerCase()]);
         const dbResponse = rows;
         successMessage.data = dbResponse;
         return res.status(status.success).send(successMessage);

@@ -26,7 +26,8 @@ const skillsCreateQuery =
 CREATE TABLE IF NOT EXISTS Skills (
     sid SERIAL PRIMARY KEY, 
     topic VARCHAR(256) NOT NULL, 
-    skill_name VARCHAR(256) NOT NULL
+    skill_name VARCHAR(256) NOT NULL,
+    UNIQUE (topic, skill_name)
     )
 `;
 

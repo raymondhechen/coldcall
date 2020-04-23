@@ -78,6 +78,7 @@ const addSkill = async (req, res) => {
         INSERT INTO 
         HasSkill(uid, sid)
         VALUES($1, $2)
+        ON CONFLICT DO NOTHING
         RETURNING *
         `
         // Insert new skill into HasSkill table

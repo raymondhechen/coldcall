@@ -83,15 +83,81 @@ class Reservations extends Component {
     changeTopic = (event) => {
         // all
         if (event.target.value === "All") {
-
+            const reqOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json',
+                            'token': this.props.location.state.token
+                        }
+            };
+            fetch('http://localhost:3000/api/reservations', reqOptions)
+            .then((response) => {
+                return response;
+            })
+            .then(response => 
+                response.json()
+                .then(json => ({
+                    status: response.status,
+                    json
+                }))
+            )
+            .then(({ json }) => {
+                console.log(json);
+                this.setState({json});
+                const { json: {data: resList}} = this.state;
+                this.setState({reservations: resList});
+            });
         }
         // learnings
         else if (event.target.value === "Learnings") {
-
+            const reqOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json',
+                            'token': this.props.location.state.token
+                        }
+            };
+            fetch('http://localhost:3000/api/learnings', reqOptions)
+            .then((response) => {
+                return response;
+            })
+            .then(response => 
+                response.json()
+                .then(json => ({
+                    status: response.status,
+                    json
+                }))
+            )
+            .then(({ json }) => {
+                console.log(json);
+                this.setState({json});
+                const { json: {data: resList}} = this.state;
+                this.setState({reservations: resList});
+            });
         }
         // teachings
         else {
-
+            const reqOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json',
+                            'token': this.props.location.state.token
+                        }
+            };
+            fetch('http://localhost:3000/api/teachings', reqOptions)
+            .then((response) => {
+                return response;
+            })
+            .then(response => 
+                response.json()
+                .then(json => ({
+                    status: response.status,
+                    json
+                }))
+            )
+            .then(({ json }) => {
+                console.log(json);
+                this.setState({json});
+                const { json: {data: resList}} = this.state;
+                this.setState({reservations: resList});
+            });
         }
     }
 

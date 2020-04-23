@@ -6,6 +6,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-content: center;
     justify-content: center;
     width: 100%;
 
@@ -17,13 +18,19 @@ const ResCardList = ({ reservations }) => {
         return (
             <ResCard 
                 key={i} 
-                studentName={reservations[i].student_id} 
-                teacherName={reservations[i].teacher_id}
+                studentFirstName={reservations[i].firstl} 
+                studentLastName={reservations[i].lastl} 
+                studentEmail={reservations[i].emaill}
+                teacherFirstName={reservations[i].firstt}
+                teacherLastName={reservations[i].lastt}
+                teacherEmail={reservations[i].emailt}
                 date={reservations[i].date}
                 startTime={reservations[i].start_time}
                 endTime={reservations[i].end_time}
-                topic={reservations[i].skillTopic}
-                skill={reservations[i].skillName}
+                topic={reservations[i].topic}
+                skill={reservations[i].skill}
+                location={reservations[i].loc}
+                place={reservations[i].place}
             />
         );
     })

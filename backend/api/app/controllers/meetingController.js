@@ -66,7 +66,7 @@ const getReservations = async (req, res) => {
         return res.status(status.bad).send(errorMessage);
     }
     const decoded = jwt.verify(token, process.env.SECRET);
-    const getReservationsQuery = 'SELECT rid, uidl, firstl, lastl, emaill, uidt, firstt, lastt, emailt, date, start_time, end_time, topic, skill_name AS skill, loc_name AS loc, place FROM ((( ( SELECT * FROM Reservations WHERE student_id = 1 OR teacher_id = 1 ORDER BY start_time ASC) as R JOIN (SELECT uid AS uidL, first_name AS firstL, last_name AS lastL, email AS emailL FROM Users) AS L ON R.student_id = L.uidL ) AS R2 JOIN ( SELECT uid AS uidT, first_name AS firstT, last_name AS lastT, email AS emailT FROM Users ) AS T ON R2.teacher_id = T.uidT ) AS C JOIN ( SELECT * FROM Skills ) AS S ON C.sid = S.sid ) AS C2 JOIN (SELECT * FROM Locations ) AS L ON C2.lid = L.lid';
+    const getReservationsQuery = 'SELECT rid, uidl, firstl, lastl, emaill, uidt, firstt, lastt, emailt, CAST(date AS VARCHAR), CAST(start_time AS VARCHAR), CAST(end_time AS VARCHAR), topic, skill_name AS skill, loc_name AS loc, place FROM ((( ( SELECT * FROM Reservations WHERE student_id = $1 OR teacher_id = $1 ORDER BY start_time ASC) as R JOIN (SELECT uid AS uidL, first_name AS firstL, last_name AS lastL, email AS emailL FROM Users) AS L ON R.student_id = L.uidL ) AS R2 JOIN ( SELECT uid AS uidT, first_name AS firstT, last_name AS lastT, email AS emailT FROM Users ) AS T ON R2.teacher_id = T.uidT ) AS C JOIN ( SELECT * FROM Skills ) AS S ON C.sid = S.sid ) AS C2 JOIN (SELECT * FROM Locations ) AS L ON C2.lid = L.lid ORDER BY start_time';
     try {
         const { rows } = await dbQuery.query(getReservationsQuery, [decoded.uid]);
         const dbResponse = rows;
@@ -91,7 +91,7 @@ const getLearnings = async (req, res) => {
         errorMessage.error = 'Token not provided';
         return res.status(status.bad).send(errorMessage);
     }
-    const getReservationsQuery = 'SELECT * FROM Reservations WHERE student_id = $1 ORDER BY start_time ASC';
+    const getReservationsQuery = 'SELECT rid, uidl, firstl, lastl, emaill, uidt, firstt, lastt, emailt, CAST(date AS VARCHAR), CAST(start_time AS VARCHAR), CAST(end_time AS VARCHAR), topic, skill_name AS skill, loc_name AS loc, place FROM ((( ( SELECT * FROM Reservations WHERE student_id = $1 ORDER BY start_time ASC) as R JOIN (SELECT uid AS uidL, first_name AS firstL, last_name AS lastL, email AS emailL FROM Users) AS L ON R.student_id = L.uidL ) AS R2 JOIN ( SELECT uid AS uidT, first_name AS firstT, last_name AS lastT, email AS emailT FROM Users ) AS T ON R2.teacher_id = T.uidT ) AS C JOIN ( SELECT * FROM Skills ) AS S ON C.sid = S.sid ) AS C2 JOIN (SELECT * FROM Locations ) AS L ON C2.lid = L.lid ORDER BY start_time';;
     
     try {
         const decoded = jwt.verify(token, process.env.SECRET);
@@ -119,7 +119,7 @@ const getTeachings = async (req, res) => {
         errorMessage.error = 'Token not provided';
         return res.status(status.bad).send(errorMessage);
     }
-    const getReservationsQuery = 'SELECT * FROM Reservations WHERE teacher_id = $1 ORDER BY start_time ASC';
+    const getReservationsQuery = 'SELECT rid, uidl, firstl, lastl, emaill, uidt, firstt, lastt, emailt, CAST(date AS VARCHAR), CAST(start_time AS VARCHAR), CAST(end_time AS VARCHAR), topic, skill_name AS skill, loc_name AS loc, place FROM ((( ( SELECT * FROM Reservations WHERE teacher_id = $1 ORDER BY start_time ASC) as R JOIN (SELECT uid AS uidL, first_name AS firstL, last_name AS lastL, email AS emailL FROM Users) AS L ON R.student_id = L.uidL ) AS R2 JOIN ( SELECT uid AS uidT, first_name AS firstT, last_name AS lastT, email AS emailT FROM Users ) AS T ON R2.teacher_id = T.uidT ) AS C JOIN ( SELECT * FROM Skills ) AS S ON C.sid = S.sid ) AS C2 JOIN (SELECT * FROM Locations ) AS L ON C2.lid = L.lid ORDER BY start_time';;
     
     try {
         const decoded = jwt.verify(token, process.env.SECRET);

@@ -143,7 +143,7 @@ class Profile extends Component {
         });
     }
 
-    addSkill() {
+    async addSkill() {
         const reqOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json',
@@ -152,6 +152,9 @@ class Profile extends Component {
             body: JSON.stringify({ topic: this.state.addTopic, skill: this.state.addField})
         };
         fetch(`http://localhost:3000/api/auth/addskill`, reqOptions)
+        .then(
+            await this.wait(100)
+        )
         .then(
             this.props.history.push({
                 pathname: '/profile',
@@ -168,6 +171,12 @@ class Profile extends Component {
 
     changeSearch = (event) => {
         this.setState({ addField: event.target.value });
+    }
+
+    wait(timeout) {
+        return new Promise(resolve => {
+            setTimeout(resolve, timeout);
+        });
     }
 
     render() {
