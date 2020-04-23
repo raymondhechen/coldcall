@@ -1,12 +1,501 @@
 sid,topic,skill_name
-1,STEM,programming
-2,Humanities,design
-3,STEM,statistics
-4,STEM,math
-5,STEM,medicine
-6,STEM,research
-7,Humanities,finance
-8,Humanities,business
-9,Sports,basketball
-10,Sports,football
-11,Sports,tennis
+1,Humanities,WDK
+2,Humanities,ISO/TS 16949
+3,STEM,Aesthetics
+4,Humanities,UML
+5,Sports,EBITDA Growth
+6,STEM,SFI
+7,Humanities,GDI+
+8,Sports,NCFM Certified
+9,Sports,UL
+10,Sports,Berkeley DB
+11,STEM,Systems Analysis
+12,Humanities,Business Journalism
+13,Humanities,Omnis
+14,Humanities,Cd
+15,Humanities,GSM-R
+16,Sports,GNU Make
+17,Humanities,TPMS
+18,STEM,SEO
+19,Sports,Oracle HR
+20,Sports,Brand Management
+21,Humanities,Maritime Operations
+22,STEM,Artistic Abilities
+23,Humanities,Xeriscaping
+24,STEM,Visual Basic
+25,Sports,UBD
+26,Humanities,Sleepwear
+27,Sports,Amazon Kindle
+28,STEM,QPST
+29,STEM,OE
+30,Humanities,CCIM
+31,Humanities,Object Oriented Modeling
+32,STEM,AJAX Toolkit
+33,Sports,SaaS
+34,Humanities,Cycling
+35,STEM,Electronic Payments
+36,STEM,Jewish History
+37,STEM,UFS
+38,Sports,IP Cameras
+39,Sports,Luxury Homes
+40,Humanities,Student Financial Aid
+41,Sports,SSL Duality
+42,Sports,RNC
+43,Humanities,Government Procurement
+44,Sports,jQuery Mobile
+45,STEM,Xactly
+46,Humanities,Farms
+47,Sports,Aerobics
+48,Humanities,DBMS
+49,Sports,XSL
+50,Sports,Valuation
+51,Humanities,Zero Waste
+52,STEM,Power Generation
+53,Sports,Psychotherapy
+54,Sports,Social Justice
+55,STEM,OTDR
+56,Sports,Brain Gym
+57,Sports,OTP
+58,Sports,Eyelash Extensions
+59,Sports,Egyptian Arabic
+60,Sports,Web Design
+61,Sports,cGMP practices
+62,Sports,QC 9.2
+63,STEM,Universal Life
+64,Sports,MCH
+65,Sports,FTSE 100
+66,Humanities,UltraTax CS
+67,STEM,TD-SCDMA
+68,STEM,MSC Patran
+69,Sports,NCDA
+70,Humanities,Online Reputation Management
+71,STEM,Youth Outreach
+72,Humanities,DTR
+73,STEM,KWI
+74,STEM,SLA
+75,Sports,Fertility
+76,Humanities,JDOM
+77,Humanities,CSRs
+78,Humanities,Tax Advisory
+79,STEM,Training Delivery
+80,Humanities,Documentation
+81,STEM,PLC Allen Bradley
+82,Humanities,Adobe Acrobat
+83,STEM,OEM Management
+84,Sports,High Performance Computing
+85,STEM,RMX
+86,Humanities,PBASIC
+87,Sports,CVIS
+88,Humanities,JMP
+89,Sports,Global Strategy
+90,Humanities,Content Strategy
+91,STEM,Proposal Writing
+92,Humanities,Songwriting
+93,Humanities,BC/DR
+94,Sports,Medical Nutrition Therapy
+95,Humanities,VT
+96,Sports,NLP
+97,Humanities,Requirements Gathering
+98,STEM,T-SQL
+99,Sports,IBS
+100,Humanities,Kettlebells
+101,Sports,Urban Planning
+102,STEM,RHIT
+103,Sports,EEO
+104,Humanities,LCMS
+105,STEM,Group Dynamics
+106,Sports,Single Family Homes
+107,STEM,Lytec
+108,STEM,US GAAP
+109,Sports,Youth Outreach
+110,STEM,Factory
+111,STEM,Data Integration
+112,Humanities,DDoS Mitigation
+113,Humanities,Wireframes
+114,STEM,GPFS
+115,Sports,RLC
+116,Humanities,IEP
+117,Humanities,VBA
+118,Humanities,Two-factor Authentication
+119,STEM,Uveitis
+120,Humanities,eCTD
+121,STEM,Vacation
+122,Sports,ADP Payroll
+123,Sports,Klarity
+124,Sports,LPS
+125,Sports,Ocular Disease
+126,Humanities,XMLBeans
+127,STEM,Accounting
+128,Sports,LBO
+129,Sports,CBCP
+130,STEM,Korean
+131,Sports,WSE
+132,Sports,University Teaching
+133,Sports,MS VC++
+134,Humanities,BGAN
+135,STEM,EOS
+136,Humanities,Revenue Cycle Management
+137,Sports,Counseling Psychology
+138,Humanities,IOS-XR
+139,STEM,Satellite TV
+140,Humanities,Import
+141,Sports,Brand Architecture
+142,STEM,PMO Services
+143,Humanities,Adult Education
+144,STEM,TCO reduction
+145,Humanities,GDP
+146,STEM,NGOs
+147,STEM,JIS
+148,STEM,LDRPS
+149,Sports,Facilitation
+150,Sports,Black &amp; White
+151,Humanities,Life Sciences
+152,Humanities,HR Management
+153,Humanities,Buyer Representation
+154,Humanities,QMF for Windows
+155,STEM,Executive Coaching
+156,Sports,DV
+157,Sports,Oracle E-Business Suite
+158,Humanities,Occupational Therapy
+159,Sports,HP-UX
+160,STEM,SFTP
+161,Sports,Web Typography
+162,Humanities,UV
+163,STEM,VMware Fusion
+164,STEM,Health Education
+165,Humanities,VCO
+166,STEM,Qt
+167,Humanities,Wholesale Banking
+168,Humanities,Biostatistics
+169,STEM,Gift Tax
+170,Humanities,QHSE
+171,Humanities,OCLC Connexion
+172,Sports,Ultipro
+173,Humanities,Github
+174,STEM,CFD
+175,Humanities,User Scenarios
+176,Humanities,SVT
+177,STEM,Government Contracting
+178,STEM,Urban Geography
+179,STEM,Fine Art Photography
+180,Sports,Software Documentation
+181,STEM,Wedding Photography
+182,Humanities,Move Up Buyers
+183,Sports,Weapons of Mass Destruction
+184,Sports,XP Professional
+185,Sports,CQA
+186,Humanities,XPages
+187,Humanities,Integrated Circuit Design
+188,STEM,Spot TV
+189,STEM,Functional Training
+190,STEM,Amadeus
+191,Sports,Kinematics
+192,STEM,Store Management
+193,STEM,SRTP
+194,Sports,Zen
+195,Humanities,Phone Etiquette
+196,STEM,Failure Analysis
+197,STEM,Fluorescence Microscopy
+198,STEM,Ulcerative Colitis
+199,Humanities,Youth Development
+200,STEM,IB
+201,Humanities,Duty Drawback
+202,STEM,ESB
+203,STEM,Static Timing Analysis
+204,STEM,ISO 27001
+205,STEM,iVantage
+206,Humanities,Bhangra
+207,Humanities,Aquaponics
+208,Sports,PQQ
+209,Sports,Board Development
+210,STEM,Sports Marketing
+211,Humanities,HDMI
+212,Sports,Laptops
+213,Humanities,OLAP
+214,Humanities,GSE
+215,STEM,Patient Advocacy
+216,STEM,Tax Research
+217,Sports,Situational Awareness
+218,STEM,OSI Model
+219,Humanities,eGate
+220,Sports,Dubbing
+221,STEM,PTO
+222,STEM,Long Distance Running
+223,Humanities,LPI
+224,STEM,MLA Style
+225,Humanities,Volunteer Management
+226,Sports,Static Timing Analysis
+227,Sports,Character Animation
+228,Humanities,Underground Mining
+229,Humanities,Ducting
+230,Humanities,Kinetic Typography
+231,Sports,OnQ
+232,Humanities,HP Openview
+233,Humanities,Analysis
+234,Humanities,DNA replication
+235,Sports,Pyxis
+236,Sports,Beauty Industry
+237,Sports,Zombies
+238,STEM,Rigging
+239,Sports,TPR
+240,Sports,Avionics
+241,STEM,Egyptian Arabic
+242,Humanities,HPLC
+243,Humanities,Pivot Tables
+244,STEM,European Studies
+245,STEM,Vectorworks
+246,STEM,Engineering Management
+247,Sports,EBPP
+248,Sports,Pyrometallurgy
+249,Humanities,SWOT analysis
+250,Humanities,Windows XP
+251,STEM,InfoComm CTS
+252,Humanities,HCCP
+253,Sports,Editorial Illustrations
+254,Sports,Zachman
+255,Humanities,Lawson HRIS
+256,STEM,QAS
+257,STEM,DB2
+258,Sports,Overseeing Projects
+259,STEM,TyMetrix
+260,Humanities,UDF
+261,Humanities,SQL Azure
+262,Sports,Change Control
+263,STEM,Benefits Administration
+264,STEM,Xing
+265,Sports,Quantity Surveying
+266,Sports,Ejabberd
+267,Sports,Jewelry Design
+268,Sports,Unit Testing
+269,STEM,Navisworks
+270,Humanities,SharePoint Server
+271,STEM,DPF
+272,Humanities,Help Desk Support
+273,STEM,IEC 62304
+274,STEM,NDIS
+275,STEM,Electricity
+276,Sports,Tennis
+277,Sports,XPDL
+278,Humanities,MLRO
+279,Sports,Organizational Leadership
+280,STEM,Data Modeling
+281,Humanities,Jimmy Jib
+282,STEM,TF-CBT
+283,Sports,GSM-R
+284,Humanities,SPC
+285,Humanities,CDL Class B
+286,Humanities,Portuguese
+287,Humanities,Microsoft Word
+288,Sports,Medical Billing
+289,Humanities,JCE
+290,STEM,First Time Home Sellers
+291,STEM,ETFs
+292,Humanities,DTD
+293,Humanities,Order Fulfillment
+294,Sports,QAC
+295,Sports,HTML5
+296,Sports,GTK
+297,Sports,PTP
+298,Sports,PQQs
+299,STEM,Amazon RDS
+300,Humanities,PVR
+301,Humanities,Ideas NX
+302,Sports,Music Production
+303,Sports,Ministry Of Defence
+304,Humanities,Maritime
+305,Sports,Data Center
+306,Sports,SBIR
+307,STEM,Carriage of Goods by Sea
+308,Sports,Chemistry
+309,Humanities,FMVSS
+310,Humanities,Key Performance Indicators
+311,Humanities,Annual Giving
+312,Sports,PTFE
+313,STEM,Electrical Troubleshooting
+314,STEM,DDR3
+315,Humanities,FpML
+316,Humanities,QSAR
+317,Humanities,NWDS
+318,Sports,IRIS
+319,Humanities,High Yield
+320,Humanities,CTR
+321,Sports,TFS
+322,Humanities,IEC
+323,Sports,Short Stories
+324,Humanities,Jidoka
+325,Humanities,ICH-GCP
+326,STEM,KCS
+327,Humanities,Kitchen Cabinets
+328,Sports,TJC
+329,Sports,QI
+330,Sports,LynxOS
+331,Humanities,Higher Education
+332,Sports,Commercial Lending
+333,Humanities,MWS
+334,STEM,Forklift Operation
+335,Humanities,Utilization
+336,Humanities,ICT
+337,STEM,Process Engineering
+338,Humanities,PDE
+339,Sports,Performance Improvement
+340,Sports,Internet Banking
+341,Humanities,Political Risk Analysis
+342,Sports,Ghost Imaging
+343,STEM,Upholstery
+344,Sports,Fashion Jewelry
+345,STEM,Zumba
+346,Humanities,SDL Tridion
+347,STEM,VCO
+348,Sports,Educational Outreach
+349,STEM,Knowledge Transfer
+350,Sports,Enterprise Risk Management
+351,Humanities,Business Alliances
+352,Sports,Network Design
+353,Humanities,Problem Solving
+354,STEM,GIS Modeling
+355,STEM,Self-esteem
+356,Sports,OmniPage
+357,Sports,Government Relations
+358,Sports,SQR
+359,Sports,Workplace Safety
+360,STEM,Emergency Nursing
+361,Sports,Registered Nurses
+362,Humanities,Ecological Restoration
+363,STEM,Rehabilitation Psychology
+364,Sports,Gym
+365,STEM,DNA Repair
+366,Humanities,IRB
+367,STEM,Equity Valuation
+368,Sports,SAP ERP
+369,Humanities,NIST
+370,Humanities,Medical Illustration
+371,Humanities,Theory
+372,Humanities,nDo
+373,Humanities,XPAC
+374,STEM,Parts
+375,STEM,Dunn &amp; Bradstreet
+376,Sports,ERISA
+377,STEM,International Trade
+378,Sports,Training Delivery
+379,Sports,Kaspersky Antivirus
+380,Humanities,PPE
+381,STEM,International Humanitarian Law
+382,Sports,Korean Culture
+383,Sports,RMDS
+384,Humanities,SVOD
+385,Humanities,Cisco MDS SAN switches
+386,STEM,IT Strategy
+387,STEM,FF&amp;E
+388,Sports,International Business
+389,Sports,MPLS-TP
+390,Humanities,NMT
+391,Sports,MCSD
+392,Humanities,GAAP
+393,Sports,FCC
+394,Humanities,VCM
+395,STEM,eWFM
+396,Sports,NCFM
+397,STEM,Development Tech
+398,STEM,SNOMED
+399,Sports,Advertising
+400,STEM,ZeroMQ
+401,Sports,VPython
+402,Humanities,Politics
+403,STEM,MMI
+404,Sports,Badminton
+405,Humanities,Arts
+406,Sports,Aluminum
+407,Sports,BMC Remedy User
+408,Sports,Financial Planning
+409,STEM,Therapists
+410,STEM,BGAN
+411,Sports,FMCSR
+412,Humanities,IEEE 802.11
+413,Humanities,DC Operations
+414,Humanities,XForms
+415,Humanities,Press Kits
+416,STEM,DCN
+417,Humanities,Epicor
+418,Sports,RMIS
+419,Sports,VxFS
+420,Sports,Nanomaterials
+421,STEM,Security Clearance
+422,STEM,TCM
+423,Sports,Simulink
+424,Humanities,Business Valuation
+425,Sports,SDSF
+426,STEM,Bluetooth
+427,STEM,RDFa
+428,Sports,Oligonucleotides
+429,Humanities,Classics
+430,Sports,Squash
+431,STEM,Trimble GPS
+432,STEM,CentOS
+433,STEM,Process Improvement
+434,Humanities,Simple IRA
+435,STEM,Karaoke
+436,STEM,Snow Leopard
+437,STEM,TCP/IP
+438,Sports,HVAC Controls
+439,Sports,Durable Medical Equipment
+440,Humanities,Particle Effects
+441,Humanities,WSAD
+442,STEM,Aircraft
+443,Humanities,AACR2
+444,STEM,BS7799
+445,Sports,Vectorworks
+446,STEM,Healthcare Management
+447,Humanities,Experion PKS
+448,Humanities,Events Coordination
+449,Humanities,NPV
+450,Humanities,Electronics
+451,STEM,Offshore Outsourcing
+452,STEM,PVElite
+453,Humanities,SEM
+454,Sports,TPM
+455,STEM,PWE3
+456,STEM,GPGPU
+457,Humanities,Evangelism
+458,Humanities,Social Justice
+459,STEM,End User Training
+460,Humanities,Front Office
+461,Sports,CXO
+462,STEM,XFS
+463,Humanities,Android
+464,Humanities,Microsoft Excel
+465,Sports,Global Operations
+466,Sports,Liability
+467,Humanities,Job Coaching
+468,Sports,Security Operations
+469,Sports,SFE
+470,Sports,XTRACT
+471,Humanities,Eyelid Surgery
+472,Humanities,Income Tax
+473,Sports,InfoComm CTS
+474,Sports,SAP MDM
+475,STEM,LCS
+476,STEM,Cardiac MRI
+477,STEM,WiFi
+478,Sports,GMS
+479,Sports,Qt Creator
+480,STEM,SharePoint
+481,Sports,Go
+482,STEM,LVM
+483,Humanities,Merchandising
+484,Sports,Group Work
+485,STEM,Hadoop
+486,STEM,XATA
+487,Humanities,Mythology
+488,Humanities,CQI
+489,Sports,Twitter
+490,Sports,RTB
+491,STEM,KPI Implementation
+492,STEM,TVPaint
+493,STEM,Taxes
+494,Humanities,Supply Chain
+495,Humanities,JDO
+496,STEM,TI DSPs
+497,Sports,RF Circuits
+498,Sports,PPDS
+499,Sports,CFDesign
+500,Sports,CSA 2010

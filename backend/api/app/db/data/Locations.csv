@@ -1,12 +1,23 @@
 lid,loc_name,place
-1,Cafe,West Union
-2,ABP,West Union
-3,Twinnies,Fitzpatrck
-4,Link,Perkins
-5,Vondy,Perkins
-6,First Floor,Perkins
-7,Edge,Bostock
-8,Second Floor,Bostock
-9,A Wing,LSRC
-10,B Wing,LSRC
-11,C Wing,LSRC
+1,West Union,First Floor
+2,Bryan Center,McDonalds
+3,Bostock,Edge
+4,West Union,ABP
+5,Bostock,Second Floor
+6,Perkins,First Floor
+7,Bostock,Third Floor
+8,Bryan Center,First Floor
+9,West Union,Couches
+10,Perkins,Second Floor
+11,Bostock,Fourth Floor
+12,West Union,Second Floor
+13,West Union,Third Floor
+14,West Union,Fourth Floor
+15,Perkins,Third Floor
+16,Perkins,Fourth Floor
+17,Perkins,Third Floor
+18,Perkins,Vondy
+19,Perkins,Gothic
+20,Bryan Center,Loop
+21,Bryan Center,Griffith
+22,Perkins,Basement
