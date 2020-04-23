@@ -183,6 +183,8 @@ class Profile extends Component {
     }
 
     async deleteSkill() {
+        console.log(this.state.delField);
+        console.log(this.state.delTopic);
         const reqOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json',
@@ -265,7 +267,7 @@ class Profile extends Component {
                         <TopicSelect id="Topics" onChange={e => this.changeTopic(e)}>
                             <option value="STEM">STEM</option>
                             <option value="Humanities">Humanities</option>
-                            <option value="Sports">Athletics</option>
+                            <option value="Athletics">Athletics</option>
                         </TopicSelect>
                         <AddSkillBox placeholder={"Add Skill"} onChange={e => this.changeSearch(e)}/>
                         <AddButton type="button" value="ADD" onClick={e => this.addSkill(e)} />
@@ -273,7 +275,7 @@ class Profile extends Component {
                         <TopicSelect id="Topics" onChange={e => this.changeDelTopic(e)}>
                             <option value="STEM">STEM</option>
                             <option value="Humanities">Humanities</option>
-                            <option value="Sports">Athletics</option>
+                            <option value="Athletics">Athletics</option>
                         </TopicSelect>
                         <AddSkillBox placeholder={"Delete Skill"} onChange={e => this.changeDelSearch(e)}/>
                         <AddButton type="button" value="DELETE" onClick={e => this.deleteSkill(e)} />

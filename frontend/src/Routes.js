@@ -8,6 +8,7 @@ import Home from './platform/pages/home';
 import People from './platform/pages/people';
 import Reservations from './platform/pages/reservations';
 import Profile from './platform/pages/profile';
+import Reserve from './platform/pages/reserve';
 
 class Routes extends Component {
     constructor(props) {
@@ -31,7 +32,8 @@ class Routes extends Component {
                 <Route exact path="/home" component={Home}/>
                 <Route exact path="/people" component={People}/>
                 <Route exact path="/reservations" component={Reservations}/>    
-                <Route exact path="/profile" component={Profile}/>                            
+                <Route exact path="/profile" component={Profile}/>  
+                <Route exact path="/reserve" component={Reserve}/>                            
             </Switch>
         );
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import UserAvatar from '../assets/user.svg';
@@ -41,14 +41,30 @@ const Email = styled.div`
     font-size: 15px;
 `;
 
-const UserCard = ({ firstName, lastName, email }) => {
-    return (
-        <Container>
-            <Avatar src={UserAvatar} alt="user" />
-            <Name>{firstName} {lastName}</Name>
-            <Email>{email}</Email>
-        </Container>
-    );
+class UserCard extends Component {
+
+    reserveUser() {
+        this.props.history.push({
+            pathname: '/reserve',
+            state: {
+                token: this.props.token,
+                uid: this.props.uid,
+                firstName: this.props.firstName,
+                lastName: this.props.lastName,
+                email: this.props.email
+            }
+        })
+    }
+
+    render() {
+        return (
+            <Container onClick={e => this.reserveUser(e)}>
+                <Avatar src={UserAvatar} alt="user" />
+                <Name>{this.props.firstName} {this.props.lastName}</Name>
+                <Email>{this.props.email}</Email>
+            </Container>
+        );
+    }
 }
 
 export default UserCard;

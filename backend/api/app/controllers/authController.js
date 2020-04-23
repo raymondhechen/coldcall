@@ -68,7 +68,7 @@ const addSkill = async (req, res) => {
         INSERT INTO 
         Skills(topic, skill_name)
         VALUES($1,$2)
-        ON CONFLICT (topic, skill_name) DO UPDATE SET sid = EXCLUDED.sid
+        ON CONFLICT (topic, skill_name) DO UPDATE SET sid = skills.sid
         RETURNING sid
         `
         const { rows } = await dbQuery.query(insertSkill, [topic, skill.toLowerCase()]);

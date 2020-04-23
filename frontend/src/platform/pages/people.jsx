@@ -83,6 +83,9 @@ class People extends Component {
         }
         else {
             console.log(this.props.location.state.token);
+            this.setState({
+                token: this.props.location.state.token
+            })
 
             fetch('http://localhost:3000/api/users')
             .then((response) => {
@@ -108,7 +111,7 @@ class People extends Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
-        fetch(`http://localhost:3000/api/users/skill?topic=${this.state.topic}&skill=${this.state.field}`, reqOptions)
+        fetch(`http://localhost:3000/api/users/topicskill?topic=${this.state.topic}&skill=${this.state.field}`, reqOptions)
         .then((response) => {
             return response;
         })
@@ -147,12 +150,12 @@ class People extends Component {
                         <TopicSelect id="Topics" onChange={e => this.onTopicChange(e)}>
                             <option value="STEM">STEM</option>
                             <option value="Humanities">Humanities</option>
-                            <option value="Sports">Athletics</option>
+                            <option value="Athletics">Athletics</option>
                         </TopicSelect>
                         <SearchBox placeholder={"Search Skills"} onChange={(e) => this.onSearchChange(e)} />
                         <Button type="button" value="ENTER" onClick={e => this.handleSubmit(e)} />
                     </SearchWrapper>
-                    <UserCardList users={this.state.users}/>
+                    <UserCardList users={this.state.users} token={this.state.token} history={this.props.history} />
                 </BodyWrapper>
 
                 <Footer/>
