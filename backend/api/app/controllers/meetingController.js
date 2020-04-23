@@ -136,21 +136,25 @@ const getTeachings = async (req, res) => {
 };
 
 /**
- * Delete learning reservation
+ * Delete reservation
  * @param {object} req 
  * @param {object} res 
  * @returns {void} return response booking deleted successfully
  */
-const deleteLearning = async (req, res) => {
-  const { rid } = req.params;
-  const { uid } = req.user;
-  const deleteLearningQuery = 'DELETE FROM Reservations WHERE rid = $1 AND student_id = $2 returning *';
+const deleteReservation = async (req, res) => {
+  const { token, rid } = req.headers;
+  if (!token) {
+      errorMessage.error = 'Token not provided';
+      return res.status(status.bad).send(errorMessage);
+  }
+  const decoded = jwt.verify(token, process.env.SECRET);
+  const deleteResQuery = 'DELETE FROM Reservations WHERE rid = $1 AND (student_id = $2 OR teacher_id = $2) returning *';
   try {
-        const { rows } = await dbQuery.query(deleteLearningQuery, [rid, uid]);
+        const { rows } = await dbQuery.query(deleteResQuery, [rid, decoded.uid]);
         const dbResponse = rows[0];
         if (!dbResponse) {
-        errorMessage.error = 'You have no learnings with that id';
-        return res.status(status.notfound).send(errorMessage);
+            errorMessage.error = 'You have no reservations with that id';
+            return res.status(status.notfound).send(errorMessage);
         }
         successMessage.data = {};
         successMessage.data.message = 'Reservation deleted successfully';
@@ -161,37 +165,11 @@ const deleteLearning = async (req, res) => {
   }
 };
 
-/**
- * Delete teaching reservation
- * @param {object} req 
- * @param {object} res 
- * @returns {void} return response booking deleted successfully
- */
-const deleteTeaching = async (req, res) => {
-    const { rid } = req.params;
-    const { uid } = req.user;
-    const deleteTeachingQuery = 'DELETE FROM Reservations WHERE rid = $1 AND teacher_id = $2 returning *';
-    try {
-        const { rows } = await dbQuery.query(deleteTeachingQuery, [rid, uid]);
-        const dbResponse = rows[0];
-        if (!dbResponse) {
-            errorMessage.error = 'You have no teachings with that id';
-            return res.status(status.notfound).send(errorMessage);
-        }
-        successMessage.data = {};
-        successMessage.data.message = 'Reservation deleted successfully';
-        return res.status(status.success).send(successMessage);
-    } catch (error) {
-        return res.status(status.error).send(error);
-    }
-};
-
 
 export {
     createReservation,
     getReservations,
     getLearnings,
     getTeachings,
-    deleteLearning,
-    deleteTeaching
+    deleteReservation
 };

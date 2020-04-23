@@ -13,11 +13,14 @@ const Container = styled.div`
     padding: 5vh 0 0 0;
 `;
 
-const ResCardList = ({ reservations }) => {
+const ResCardList = ({ reservations, token, history }) => {
     const cardArray = reservations.map((reservation, i) => {
         return (
             <ResCard 
                 key={i} 
+                token={token}
+                history={history}
+                meetingID={reservations[i].rid}
                 studentFirstName={reservations[i].firstl} 
                 studentLastName={reservations[i].lastl} 
                 studentEmail={reservations[i].emaill}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from "react-router-dom";
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
 
@@ -231,4 +232,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default withRouter(Profile);

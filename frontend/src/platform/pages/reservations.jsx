@@ -9,29 +9,11 @@ const BodyWrapper = styled.div`
     padding-top: 15vh;
     align-items: center;
     text-align: center;
-    min-height: 72.5vh;
-`;
-
-const LearningButton = styled.input`
-    padding-top: 0.25vh;
-    width: 10%;
-    max-width: 100px;
-    height: 48px;
-    border-radius: 5px;
-    border: 0;
-    outline: none;
-    background: #19A4F2;
-    font-family: proxima-nova;
-    font-weight: 700;
-    transition: background-color 0.2s ease;
-
-    :active {
-        background: #0086D1;
-    }
+    min-height: 77.5vh;
 `;
 
 const TopicSelect = styled.select` 
-    width: 15%;
+    width: 12.5%;
     height: 6.5vh;
     max-width: 300px;
     margin: 8px 0;
@@ -73,7 +55,6 @@ class Reservations extends Component {
             }))
         )
         .then(({ json }) => {
-            console.log(json);
             this.setState({json});
             const { json: {data: resList}} = this.state;
             this.setState({reservations: resList});
@@ -172,7 +153,7 @@ class Reservations extends Component {
                             <option value="Learnings">Learnings</option>
                             <option value="Teachings">Teachings</option>
                         </TopicSelect>
-                    <ResCardList reservations={this.state.reservations}/>
+                    <ResCardList reservations={this.state.reservations} token={this.props.location.state.token} history={this.props.history}/>
                 </BodyWrapper>
 
                 <Footer/>
