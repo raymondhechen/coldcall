@@ -279,7 +279,7 @@ class Reserve extends Component {
 
                     <Subtitle>
                     <b>Topic         </b>
-                        <TopicSelect id="Topics" onChange={e => this.topicChange(e)}>
+                        <TopicSelect id="Topics" value={this.state.topic} onChange={e => this.topicChange(e)}>
                             <option value="STEM">STEM</option>
                             <option value="Humanities">Humanities</option>
                             <option value="Athletics">Athletics</option>
@@ -291,7 +291,7 @@ class Reserve extends Component {
                     
                     <Subtitle>
                     <b>Location     </b>
-                        <TopicSelect id="locations" onChange={e => this.locChange(e)}>
+                        <TopicSelect id="locations" value={this.state.location} onChange={e => this.locChange(e)}>
                             <option value="West Union">West Union</option>
                             <option value="Perkins">Perkins</option>
                             <option value="Bostock">Bostock</option>
@@ -299,7 +299,7 @@ class Reserve extends Component {
                         </TopicSelect>
                     <br/>
                     <b>Place        </b>
-                        <TopicSelect id="locations" onChange={e => this.locChange(e)}>
+                        <TopicSelect id="places" value={this.state.place} onChange={e => this.placeChange(e)}>
                             <option value="First Floor">First Floor</option>
                             <option value="Second Floor">Second Floor</option>
                             <option value="Third Floor">Third Floor</option>
