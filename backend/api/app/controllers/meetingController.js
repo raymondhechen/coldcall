@@ -14,31 +14,65 @@ dotenv.config();
  * @returns {object} reflection object
  */
 const createReservation = async (req, res) => {
-    const { teacher_id, start_time, end_time, sid, lid } = req.body;
-    const { uid } = req.user;
-    const created_on = moment(new Date());
+    const { uid, date, time, topic, skill, location, place  } = req.body;
+    console.log(uid);
+    console.log(date);
+    console.log(time);
+    console.log(topic);
+    console.log(skill);
+    console.log(location);
+    console.log(place);
+    const { token } = req.headers;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
+    const decoded = jwt.verify(token, process.env.SECRET);   
 
-    if (empty(student_id) || empty(teacher_id) || empty(start_time) || empty(end_time)) {
+    if (empty(uid) || empty(date) || empty(time) || empty(topic) || empty(skill) || empty(location) || empty(place)) {
         errorMessage.error = 'Missing information';
         return res.status(status.bad).send(errorMessage);
     }
-    
     const createReservationQuery = 
     `
-        INSERT INTO
-        Reservations(student_id, teacher_id, start_time, end_time, sid, lid, finished, time_created)
-        VALUES($1, $2, $3, $4, $5, $6, $7, $8)
-        returning *
+    INSERT INTO 
+    Reservations(student_id, teacher_id, date, start_time, end_time, finished, time_created, sid, lid)
+
+    (
+    SELECT * 
+    FROM
+    (VALUES(CAST($1 AS INTEGER), CAST($2 AS INTEGER), to_date($3, 'YYYY-MM-DD'), to_timestamp($4, 'HH24:MI:SS'), to_timestamp($4, 'HH24:MI:SS') + '1 hour', false, current_date)) AS Info
+
+    CROSS JOIN
+
+    (
+        SELECT * 
+        FROM
+        (
+            (SELECT sid
+            FROM skills
+            WHERE topic = $5 AND skill_name = $6) AS skillID
+        
+            CROSS JOIN 
+        
+            (SELECT lid
+            FROM locations
+            WHERE loc_name = $7 AND place = $8) AS locID
+        ) AS Info
+    ) AS Combined
+    )
+
+    RETURNING *
     `;
     const values = [
+        decoded.uid,
         uid,
-        teacher_id,
-        start_time, 
-        end_time, 
-        sid, 
-        lid,
-        0, 
-        created_on
+        date, 
+        time, 
+        topic,
+        skill, 
+        location, 
+        place
     ];
 
     try {
@@ -48,7 +82,7 @@ const createReservation = async (req, res) => {
         return res.status(status.created).send(successMessage);
     } 
     catch (error) {
-        errorMessage.error = 'Unable to create booking';
+        errorMessage.error = 'Unable to create reservation';
         return res.status(status.error).send(errorMessage);
     }
 };

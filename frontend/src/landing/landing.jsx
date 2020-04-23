@@ -259,10 +259,6 @@ class Landing extends Component {
                     <FooterLeft>
                         © Cold Call 2020
                     </FooterLeft>
-                    <FooterRight>
-                        Designed and Built with ❤️ by <br/>
-                        Raymond Chen, Shrey Gupta, Sachin Jaishankar, Jeffrey Luo, Luke Qin
-                    </FooterRight>
                 </Footer>
             </div>
         )

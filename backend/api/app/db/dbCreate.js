@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Reservations (
     end_time TIME NOT NULL CHECK (end_time > start_time),
     sid SERIAL NOT NULL REFERENCES Skills(sid), 
     lid SERIAL NOT NULL REFERENCES Locations(lid), 
-    finished BOOLEAN NOT NULL,
+    finished BOOLEAN DEFAULT false,
     time_created DATE NOT NULL
 )
 `;

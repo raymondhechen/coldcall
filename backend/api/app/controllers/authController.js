@@ -106,7 +106,7 @@ const deleteSkill = async (req, res) => {
         return res.status(status.bad).send(errorMessage);
     }
     try {
-        const decoded = jwt.verify(token, process.env.SECRET);    
+        const decoded = jwt.verify(token, process.env.SECRET); 
         const deleteHasSkill = 
         `
         DELETE FROM HasSkill 

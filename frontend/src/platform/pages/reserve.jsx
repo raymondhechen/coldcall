@@ -43,8 +43,6 @@ const XButton = styled.img`
 `;
 
 const Title = styled.div`
-    margin-top: 2.5vh;
-
     font-family: proxima-nova;
     font-style: normal;
     font-weight: 700;
@@ -146,6 +144,8 @@ class Reserve extends Component {
         this.state = {
             date: "",
             time: "",
+            topic: "STEM",
+            skill: "",
             location: "West Union",
             place: "First Floor",
             token: ""
@@ -154,6 +154,7 @@ class Reserve extends Component {
 
     // Back click function
     backClick() {
+        this.wait(100);
         this.props.history.push({
             pathname: '/people',
             state: {
@@ -167,11 +168,25 @@ class Reserve extends Component {
         this.setState({
             date: e.target.value,
         });
+        console.log(e.target.value);
     }
 
     timeChange = (e) => {
         this.setState({
             time: e.target.value,
+        });
+        console.log(e.target.value);
+    }
+
+    topicChange = (e) => {
+        this.setState({
+            topic: e.target.value,
+        });
+    }
+
+    skillChange = (e) => {
+        this.setState({
+            skill: e.target.value,
         });
     }
 
@@ -187,13 +202,23 @@ class Reserve extends Component {
         });
     }
 
-    submitRequest() {
+    async submitRequest() {
         const reqOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: this.state.email, first_name: this.state.firstName, last_name: this.state.lastName, password: this.state.password })
+            headers: { 'Content-Type': 'application/json',
+                        'token': this.props.location.state.token
+                    },
+            body: JSON.stringify({ 
+                uid: this.props.location.state.uid,
+                date: this.state.date, 
+                time: this.state.time, 
+                topic: this.state.topic,
+                skill: this.state.skill,
+                location: this.state.location,
+                place: this.state.place
+            })
         };
-        fetch('http://localhost:3000/api/auth/signup', reqOptions)
+        fetch('http://localhost:3000/api/reserve', reqOptions)
         .then((response) => {
             return response;
         })
@@ -204,15 +229,15 @@ class Reserve extends Component {
                 json
             })
         ))
+        .then(
+            await this.wait(100)
+        )
         .then(({ status, json }) => {
-            this.setState({json});
-            const { json: {data: {token: tokenID}}} = this.state;
-            this.setState({token: tokenID});
             if (status === 201) {
                 this.props.history.push({
                     pathname: '/reservations',
                     state: {
-                        token: tokenID
+                        token: this.props.location.state.token
                     }
                 });
             }
@@ -222,10 +247,10 @@ class Reserve extends Component {
         });
     }
 
-    handleEnterKey = (e) => {
-        if (e.key === 'Enter') {
-            this.validateEmail();
-        }
+    wait(timeout) {
+        return new Promise(resolve => {
+            setTimeout(resolve, timeout);
+        });
     }
 
     render() {
@@ -243,14 +268,27 @@ class Reserve extends Component {
                     <Subtitle><b>Name:</b> {this.props.location.state.firstName} {this.props.location.state.lastName}</Subtitle>
                     <Subtitle><b>Email:</b> {this.props.location.state.email}</Subtitle>
                     <br/>
+                    
                     <Subtitle>
-                    <b>Date</b>
+                    <b>Date         </b>
+                    <DateBox type="date" value={this.state.date} onKeyPress={this.handleEnterKey} onChange={e => this.dateChange(e)}/>
+                    <br/>
+                    <b>Time         </b>
+                    <DateBox type="time" value={this.state.time} onKeyPress={this.handleEnterKey} onChange={e => this.timeChange(e)}/>
                     </Subtitle>
-                    <DateBox type="date" value={this.state.lastName} onKeyPress={this.handleEnterKey} onChange={e => this.dateChange(e)}/>
+
                     <Subtitle>
-                    <b>Time</b> (1 hour duration)
+                    <b>Topic         </b>
+                        <TopicSelect id="Topics" onChange={e => this.topicChange(e)}>
+                            <option value="STEM">STEM</option>
+                            <option value="Humanities">Humanities</option>
+                            <option value="Athletics">Athletics</option>
+                        </TopicSelect>
+                    <br/>
+                    <b>Skill         </b>
+                    <TextBox value={this.state.skill} onKeyPress={this.handleEnterKey} onChange={e => this.skillChange(e)}/>
                     </Subtitle>
-                    <DateBox type="time" value={this.state.lastName} onKeyPress={this.handleEnterKey} onChange={e => this.timeChange(e)}/>
+                    
                     <Subtitle>
                     <b>Location     </b>
                         <TopicSelect id="locations" onChange={e => this.locChange(e)}>
@@ -259,7 +297,7 @@ class Reserve extends Component {
                             <option value="Bostock">Bostock</option>
                             <option value="Bryan Center">Bryan Center</option>
                         </TopicSelect>
-                        <br/>
+                    <br/>
                     <b>Place        </b>
                         <TopicSelect id="locations" onChange={e => this.locChange(e)}>
                             <option value="First Floor">First Floor</option>
