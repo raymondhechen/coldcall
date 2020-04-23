@@ -1,7 +1,11 @@
 import moment from 'moment';
 import dbQuery from '../db/dbQuery';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { empty } from '../middlewares/validations';
 import { errorMessage, successMessage, status } from '../middlewares/status';
+
+dotenv.config();
 
 /**
  * Create a reservation
@@ -56,16 +60,16 @@ const createReservation = async (req, res) => {
  * @returns {object} buses array
  */
 const getReservations = async (req, res) => {
-    const { uid } = req.user;
-    const getReservationsQuery = 'SELECT * FROM Reservations WHERE student_id = $1 OR teacher_id = $1 ORDER BY start_time ASC';
-    
+    const { token } = req.headers;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
+    const decoded = jwt.verify(token, process.env.SECRET);
+    const getReservationsQuery = 'SELECT rid, uidl, firstl, lastl, emaill, uidt, firstt, lastt, emailt, date, start_time, end_time, topic, skill_name AS skill, loc_name AS loc, place FROM ((( ( SELECT * FROM Reservations WHERE student_id = 1 OR teacher_id = 1 ORDER BY start_time ASC) as R JOIN (SELECT uid AS uidL, first_name AS firstL, last_name AS lastL, email AS emailL FROM Users) AS L ON R.student_id = L.uidL ) AS R2 JOIN ( SELECT uid AS uidT, first_name AS firstT, last_name AS lastT, email AS emailT FROM Users ) AS T ON R2.teacher_id = T.uidT ) AS C JOIN ( SELECT * FROM Skills ) AS S ON C.sid = S.sid ) AS C2 JOIN (SELECT * FROM Locations ) AS L ON C2.lid = L.lid';
     try {
-        const { rows } = await dbQuery.query(getReservationsQuery, [uid]);
+        const { rows } = await dbQuery.query(getReservationsQuery, [decoded.uid]);
         const dbResponse = rows;
-        if (dbResponse[0] === undefined) {
-            errorMessage.error = 'No reservations';
-            return res.status(status.notfound).send(errorMessage);
-        }
         successMessage.data = dbResponse;
         return res.status(status.success).send(successMessage);
     } 
@@ -82,16 +86,18 @@ const getReservations = async (req, res) => {
  * @returns {object} buses array
  */
 const getLearnings = async (req, res) => {
-    const { uid } = req.user;
+    const { token } = req.headers;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
     const getReservationsQuery = 'SELECT * FROM Reservations WHERE student_id = $1 ORDER BY start_time ASC';
     
     try {
-        const { rows } = await dbQuery.query(getReservationsQuery, [uid]);
+        const decoded = jwt.verify(token, process.env.SECRET);
+
+        const { rows } = await dbQuery.query(getReservationsQuery, [decoded.uid]);
         const dbResponse = rows;
-        if (dbResponse[0] === undefined) {
-            errorMessage.error = 'No learnings';
-            return res.status(status.notfound).send(errorMessage);
-        }
         successMessage.data = dbResponse;
         return res.status(status.success).send(successMessage);
     } 
@@ -108,16 +114,18 @@ const getLearnings = async (req, res) => {
  * @returns {object} buses array
  */
 const getTeachings = async (req, res) => {
-    const { uid } = req.user;
+    const { token } = req.headers;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
     const getReservationsQuery = 'SELECT * FROM Reservations WHERE teacher_id = $1 ORDER BY start_time ASC';
     
     try {
-        const { rows } = await dbQuery.query(getReservationsQuery, [uid]);
+        const decoded = jwt.verify(token, process.env.SECRET);
+
+        const { rows } = await dbQuery.query(getReservationsQuery, [decoded.uid]);
         const dbResponse = rows;
-        if (dbResponse[0] === undefined) {
-            errorMessage.error = 'No teachings';
-            return res.status(status.notfound).send(errorMessage);
-        }
         successMessage.data = dbResponse;
         return res.status(status.success).send(successMessage);
     } 

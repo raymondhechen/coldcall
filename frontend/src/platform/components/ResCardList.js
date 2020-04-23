@@ -17,12 +17,13 @@ const ResCardList = ({ reservations }) => {
         return (
             <ResCard 
                 key={i} 
-                id={reservations[i].id} 
-                name={reservations[i].name} 
-                email={reservations[i].email}
+                studentName={reservations[i].student_id} 
+                teacherName={reservations[i].teacher_id}
                 date={reservations[i].date}
-                time={reservations[i].time}
-                location={reservations[i].location}
+                startTime={reservations[i].start_time}
+                endTime={reservations[i].end_time}
+                topic={reservations[i].skillTopic}
+                skill={reservations[i].skillName}
             />
         );
     })

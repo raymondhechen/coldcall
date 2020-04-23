@@ -70,11 +70,13 @@ class People extends Component {
         super()
         this.state = {
             users: [],
-            field: ''
+            field: '',
+            topic: "STEM"
         }
     }
 
     componentDidMount() {
+        console.log(this.props.location.state.token);
         fetch('http://localhost:3000/api/users')
         .then((response) => {
             return response;
@@ -98,7 +100,7 @@ class People extends Component {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
-        fetch(`http://localhost:3000/api/users/skill?skill=${this.state.field}`, reqOptions)
+        fetch(`http://localhost:3000/api/users/skill?topic=${this.state.topic}&skill=${this.state.field}`, reqOptions)
         .then((response) => {
             return response;
         })
@@ -123,6 +125,10 @@ class People extends Component {
         this.setState({ field: event.target.value });
     }
 
+    onTopicChange = (event) => {
+        this.setState({ topic: event.target.value });
+    }
+
     render() {
         return (
             <div>
@@ -130,7 +136,7 @@ class People extends Component {
 
                 <BodyWrapper>
                     <SearchWrapper>
-                        <TopicSelect id="Topics">
+                        <TopicSelect id="Topics" onChange={e => this.onTopicChange(e)}>
                             <option value="STEM">STEM</option>
                             <option value="Humanities">Humanities</option>
                             <option value="Sports">Athletics</option>

@@ -26,12 +26,6 @@ const Name = styled.div`
     font-size: 22.5px;
 `;
 
-const Email = styled.div`
-    font-family: Lato;
-    font-weight: 500;
-    font-size: 15px;
-`;
-
 const Date = styled.div`
     font-family: Lato;
     font-weight: 500;
@@ -44,13 +38,22 @@ const Time = styled.div`
     font-size: 15px;
 `;
 
-const ResCard = ({ name, email, date, time }) => {
+const Topic = styled.div`
+    font-family: Lato;
+    font-weight: 500;
+    font-size: 15px;
+`;
+
+const ResCard = ({ student_id, teacher_id, date, start_time, end_time, topic, skill}) => {
     return (
         <Container>
-            <Name>{name}</Name>
-            <Email>{email}</Email>
+            <Name>{student_id}</Name>
+            <Name>{teacher_id}</Name>
             <Date>{date}</Date>
-            <Time>{time}</Time>
+            <Time>{start_time}</Time>
+            <Time>{end_time}</Time>
+            <Topic>{topic}</Topic>
+            <Topic>{skill}</Topic>
         </Container>
     );
 }
