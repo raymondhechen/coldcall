@@ -41,14 +41,30 @@ const Email = styled.div`
     font-size: 15px;
 `;
 
-const UserCard = ({ firstName, lastName, email }) => {
-    return (
-        <Container>
-            <Avatar src={UserAvatar} alt="user" />
-            <Name>{firstName} {lastName}</Name>
-            <Email>{email}</Email>
-        </Container>
-    );
+// const UserCard = ({ firstName, lastName, email }) => {
+//     var show = false;
+    // return (
+    //     <Container>
+    //         <Avatar src={UserAvatar} alt="user" />
+    //         <Name>{firstName} {lastName}</Name>
+    //         <Email>{email}</Email>
+    //     </Container>
+    // );
+// }
+
+class UserCard extends React.Component {
+    render() {
+        const { firstName } = this.props;
+        const { lastName } = this.props;
+        const { email } = this.props;
+        return (
+            <Container>
+                <Avatar src={UserAvatar} alt="user" />
+                <Name>{firstName} {lastName}</Name>
+                <Email>{email}</Email>
+            </Container>
+        );
+    }
 }
 
 export default UserCard;
