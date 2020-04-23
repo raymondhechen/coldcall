@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import UserAvatar from '../assets/user.svg';
+import Modal from './Modal';
 
 const Container = styled.div`
     display: flex;
@@ -53,16 +54,32 @@ const Email = styled.div`
 // }
 
 class UserCard extends React.Component {
+    state = { show: false };
+
+    showModal = () => {
+        this.setState({ show: true });
+    };
+
+    hideModal = () => {
+        this.setState({ show: false });
+    };
+
     render() {
         const { firstName } = this.props;
         const { lastName } = this.props;
         const { email } = this.props;
         return (
-            <Container>
-                <Avatar src={UserAvatar} alt="user" />
-                <Name>{firstName} {lastName}</Name>
-                <Email>{email}</Email>
-            </Container>
+            <div>
+                <Modal show={this.state.show} handleClose={this.hideModal}>
+                    <p>Modal</p>
+                    <p>Data</p>
+                </Modal>
+                <Container onClick={this.showModal}>
+                    <Avatar src={UserAvatar} alt="user" />
+                    <Name>{firstName} {lastName}</Name>
+                    <Email>{email}</Email>
+                </Container>        
+            </div>
         );
     }
 }
