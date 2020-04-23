@@ -16,9 +16,11 @@ const BodyWrapper = styled.div`
 `;
 
 const LeftWrapper = styled.div`
-    width: 50%;
+    width: 35%;
     display: flex;
     justify-content: center;
+    margin-right: 10vw;
+    padding-left: 10vw;
 `;
 
 const Box = styled.div`
@@ -51,11 +53,15 @@ const SubTitle = styled.div`
 `;
 
 const RightWrapper = styled.div`
-    width: 50%
+    width: 25%
+`;
+
+const ThirdWrapper = styled.div` 
+    width: 40%
 `;
 
 const AddSkillBox = styled.input`
-    width: 35%;
+    width: 40%;
     max-width: 300px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -70,7 +76,7 @@ const AddSkillBox = styled.input`
 
 const AddButton = styled.input`
     padding-top: 0.25vh;
-    width: 10%;
+    width: 15%;
     max-width: 100px;
     height: 48px;
     border-radius: 5px;
@@ -87,7 +93,7 @@ const AddButton = styled.input`
 `;
 
 const TopicSelect = styled.select` 
-    width: 15%;
+    width: 20%;
     height: 6.5vh;
     max-width: 300px;
     margin: 8px 0;
@@ -110,38 +116,48 @@ class Profile extends Component {
             skills: [],
             token: "",
             addField: "",
-            addTopic: "STEM"
+            addTopic: "STEM",
+            delField: "",
+            delTopic: "STEM"
         };
     }
 
     componentDidMount() {
-        console.log(this.props.location.state.token);
-        const reqOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json',
-                        'token': this.props.location.state.token
-                    },
-            body: JSON.stringify({ email: this.state.email, password: this.state.password })
-        };
-        fetch('http://localhost:3000/api/auth/user', reqOptions)
-        .then((response) => {
-            return response;
-        })
-        .then(response => 
-            response.json()
-            .then(json => ({
-                status: response.status,
-                json
-            }))
-        )
-        .then(({ json }) => {
-            this.setState({json});
-            const { json: {data: [uid, emailAdd, first, last, skillSet]}} = this.state;
-            this.setState({firstName: first});
-            this.setState({lastName: last});
-            this.setState({email: emailAdd});
-            this.setState({skills: skillSet})
-        });
+        if (this.props.location.state === undefined) {
+            this.props.history.push({
+                pathname: '/signin',
+            })
+        }
+        else {
+            console.log(this.props.location.state.token);
+
+            const reqOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json',
+                            'token': this.props.location.state.token
+                        },
+                body: JSON.stringify({ email: this.state.email, password: this.state.password })
+            };
+            fetch('http://localhost:3000/api/auth/user', reqOptions)
+            .then((response) => {
+                return response;
+            })
+            .then(response => 
+                response.json()
+                .then(json => ({
+                    status: response.status,
+                    json
+                }))
+            )
+            .then(({ json }) => {
+                this.setState({json});
+                const { json: {data: [uid, emailAdd, first, last, skillSet]}} = this.state;
+                this.setState({firstName: first});
+                this.setState({lastName: last});
+                this.setState({email: emailAdd});
+                this.setState({skills: skillSet})
+            });
+        }
     }
 
     async addSkill() {
@@ -166,12 +182,42 @@ class Profile extends Component {
         );
     }
 
+    async deleteSkill() {
+        const reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json',
+                        'token': this.props.location.state.token 
+                    },
+            body: JSON.stringify({ topic: this.state.delTopic, skill: this.state.delField})
+        };
+        fetch(`http://localhost:3000/api/auth/deleteskill`, reqOptions)
+        .then(
+            await this.wait(100)
+        )
+        .then(
+            this.props.history.push({
+                pathname: '/profile',
+                state: {
+                    token: this.props.location.state.token
+                }
+            })
+        );
+    }
+
     changeTopic = (event) => {
         this.setState({ addTopic: event.target.value });
     }
 
     changeSearch = (event) => {
         this.setState({ addField: event.target.value });
+    }
+
+    changeDelTopic = (event) => {
+        this.setState({ delTopic: event.target.value });
+    }
+
+    changeDelSearch = (event) => {
+        this.setState({ delField: event.target.value });
     }
 
     wait(timeout) {
@@ -214,16 +260,24 @@ class Profile extends Component {
                         <SubTitle>
                             {skillList}
                         </SubTitle>
-
+                    </RightWrapper>
+                    <ThirdWrapper>
                         <TopicSelect id="Topics" onChange={e => this.changeTopic(e)}>
                             <option value="STEM">STEM</option>
                             <option value="Humanities">Humanities</option>
                             <option value="Sports">Athletics</option>
                         </TopicSelect>
-
                         <AddSkillBox placeholder={"Add Skill"} onChange={e => this.changeSearch(e)}/>
                         <AddButton type="button" value="ADD" onClick={e => this.addSkill(e)} />
-                    </RightWrapper>
+                        <br/>
+                        <TopicSelect id="Topics" onChange={e => this.changeDelTopic(e)}>
+                            <option value="STEM">STEM</option>
+                            <option value="Humanities">Humanities</option>
+                            <option value="Sports">Athletics</option>
+                        </TopicSelect>
+                        <AddSkillBox placeholder={"Delete Skill"} onChange={e => this.changeDelSearch(e)}/>
+                        <AddButton type="button" value="DELETE" onClick={e => this.deleteSkill(e)} />
+                    </ThirdWrapper>
                 </BodyWrapper>
 
                 <Footer/>

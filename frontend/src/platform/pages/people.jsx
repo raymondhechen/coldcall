@@ -76,23 +76,31 @@ class People extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.location.state.token);
-        fetch('http://localhost:3000/api/users')
-        .then((response) => {
-            return response;
-        })
-        .then(response => 
-            response.json()
-            .then(json => ({
-                status: response.status,
-                json
-            }))
-        )
-        .then(({ json }) => {
-            this.setState({json});
-            const { json: {data: usersList}} = this.state;
-            this.setState({users: usersList});
-        });
+        if (this.props.location.state === undefined) {
+            this.props.history.push({
+                pathname: '/signin',
+            })
+        }
+        else {
+            console.log(this.props.location.state.token);
+
+            fetch('http://localhost:3000/api/users')
+            .then((response) => {
+                return response;
+            })
+            .then(response => 
+                response.json()
+                .then(json => ({
+                    status: response.status,
+                    json
+                }))
+            )
+            .then(({ json }) => {
+                this.setState({json});
+                const { json: {data: usersList}} = this.state;
+                this.setState({users: usersList});
+            });
+        }
     }
 
     handleSubmit() {

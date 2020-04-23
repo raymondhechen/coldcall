@@ -67,10 +67,11 @@ const addSkill = async (req, res) => {
         `
         INSERT INTO 
         Skills(topic, skill_name)
-        VALUES($1, $2)
-        RETURNING *
+        VALUES($1,$2)
+        ON CONFLICT (topic, skill_name) DO UPDATE SET sid = EXCLUDED.sid
+        RETURNING sid
         `
-        const { rows } = await dbQuery.query(insertSkill, [topic, skill]);
+        const { rows } = await dbQuery.query(insertSkill, [topic, skill.toLowerCase()]);
         var skillID = rows[0].sid
         
         const insertHasSkill = 
@@ -83,6 +84,39 @@ const addSkill = async (req, res) => {
         `
         // Insert new skill into HasSkill table
         await dbQuery.query(insertHasSkill, [decoded.uid, skillID]);
+        return res.status(status.success).send(successMessage);
+    } catch (error) {
+        console.log(error);
+        errorMessage.error = 'Authentication Failed';
+        return res.status(status.unauthorized).send(errorMessage);
+    }
+};
+
+/**
+ * delete skill from user
+ * @param {object} req
+ * @param {object} res
+ * @returns {object} user info
+ */
+const deleteSkill = async (req, res) => {
+    const { token } = req.headers;
+    const { topic, skill } = req.body;
+    if (!token) {
+        errorMessage.error = 'Token not provided';
+        return res.status(status.bad).send(errorMessage);
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET);    
+        const deleteHasSkill = 
+        `
+        DELETE FROM HasSkill 
+        WHERE uid = $1 AND sid = (SELECT sid
+        FROM Skills
+        WHERE topic = $2 AND skill_name = $3)
+        RETURNING *
+        `
+        // Delete skill into HasSkill table
+        await dbQuery.query(deleteHasSkill, [decoded.uid, topic, skill.toLowerCase()]);
         return res.status(status.success).send(successMessage);
     } catch (error) {
         console.log(error);
@@ -190,4 +224,4 @@ const siginUser = async (req, res) => {
     }
 };
 
-export { getUser, addSkill, createUser, siginUser };
+export { getUser, addSkill, deleteSkill, createUser, siginUser };

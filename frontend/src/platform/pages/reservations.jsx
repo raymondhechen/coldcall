@@ -37,28 +37,36 @@ class Reservations extends Component {
     }
 
     componentDidMount() {
-        const reqOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json',
-                        'token': this.props.location.state.token
-                    }
-        };
-        fetch('http://localhost:3000/api/reservations', reqOptions)
-        .then((response) => {
-            return response;
-        })
-        .then(response => 
-            response.json()
-            .then(json => ({
-                status: response.status,
-                json
-            }))
-        )
-        .then(({ json }) => {
-            this.setState({json});
-            const { json: {data: resList}} = this.state;
-            this.setState({reservations: resList});
-        });
+        if (this.props.location.state === undefined) {
+            this.props.history.push({
+                pathname: '/signin',
+            })
+        }
+        else {
+            console.log(this.props.location.state.token);
+            const reqOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json',
+                            'token': this.props.location.state.token
+                        }
+            };
+            fetch('http://localhost:3000/api/reservations', reqOptions)
+            .then((response) => {
+                return response;
+            })
+            .then(response => 
+                response.json()
+                .then(json => ({
+                    status: response.status,
+                    json
+                }))
+            )
+            .then(({ json }) => {
+                this.setState({json});
+                const { json: {data: resList}} = this.state;
+                this.setState({reservations: resList});
+            });
+        }
     }
 
     changeTopic = (event) => {

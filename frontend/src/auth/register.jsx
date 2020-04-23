@@ -187,7 +187,7 @@ class Register extends Component {
             return false;
         }
 
-        fetch('http://localhost:5000/api/users/email?email=' + this.state.email)
+        fetch('http://localhost:3000/api/users/email?email=' + this.state.email)
         .then(res => res.json())
         .then((result) => {
             if (result.status === "success") {
