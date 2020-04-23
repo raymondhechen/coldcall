@@ -1,23 +1,29 @@
 lid,loc_name,place
-1,West Union,First Floor
-2,Bryan Center,McDonalds
 3,Bostock,Edge
-4,West Union,ABP
+24,Bostock,Basement
+23,Bostock,First Floor
 5,Bostock,Second Floor
-6,Perkins,First Floor
 7,Bostock,Third Floor
-8,Bryan Center,First Floor
-9,West Union,Couches
-10,Perkins,Second Floor
 11,Bostock,Fourth Floor
-12,West Union,Second Floor
-13,West Union,Third Floor
-14,West Union,Fourth Floor
+2,Bryan Center,McDonalds
+8,Bryan Center,First Floor
+25,Bryan Center,Second Floor
+26,Bryan Center,Third Floor
+27,Bryan Center,Basement
+20,Bryan Center,Loop
+21,Bryan Center,Griffith
+6,Perkins,First Floor
+10,Perkins,Second Floor
 15,Perkins,Third Floor
 16,Perkins,Fourth Floor
 17,Perkins,Third Floor
 18,Perkins,Vondy
 19,Perkins,Gothic
-20,Bryan Center,Loop
-21,Bryan Center,Griffith
 22,Perkins,Basement
+1,West Union,First Floor
+4,West Union,ABP
+9,West Union,Couches
+28,West Union,Basement
+12,West Union,Second Floor
+13,West Union,Third Floor
+14,West Union,Fourth Floor
