@@ -1,10 +1,11 @@
-# We're now [colddcall.co](https://coldcall.co)
+# We're now [coldcall.co](https://coldcall.co)!
+<br>
 
 # Cold Call
-Connecting, Learning, and Empowering
+Connecting, Learning, and Empowering students.
 
 ## Note
-This system version was built and designed to meet specifications for Duke University's COMPSCI 316 course on databases. 
+This system was built and designed to meet specifications for Duke University's COMPSCI 316 course on databases.
 
 ## Instructions
 To run this platform locally for development/testing purposes, following the instructions below after cloning the repository. Make sure you have ReactJS, ExpressJS, and NodeJS installed. The remaining dependencies that need to be installed can be found by running the platform and checking the errors. (react-router-dom, styled-components, jwt-auth, etc.)
