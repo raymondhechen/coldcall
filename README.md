@@ -1,3 +1,5 @@
+# We're now [colddcall.co](https://coldcall.co)
+
 # Cold Call
 Connecting, Learning, and Empowering
 
