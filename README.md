@@ -5,7 +5,7 @@
 Connecting, Learning, and Empowering students.
 
 ## Note
-This system was built and designed to meet specifications for Duke University's COMPSCI 316 course on databases.
+This repository is legacy code for our revamped platform at [coldcall.co](https://coldcall.co). [coldcall.ai](https://coldcall.ai) redirects to [coldcall.co](https://coldcall.co).
 
 ## Instructions
 To run this platform locally for development/testing purposes, following the instructions below after cloning the repository. Make sure you have ReactJS, ExpressJS, and NodeJS installed. The remaining dependencies that need to be installed can be found by running the platform and checking the errors. (react-router-dom, styled-components, jwt-auth, etc.)
